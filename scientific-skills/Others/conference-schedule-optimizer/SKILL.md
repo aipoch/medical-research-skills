@@ -1,110 +1,220 @@
 ---
 name: conference-schedule-optimizer
-description: Optimize conference schedule to avoid conflicts and maximize attendance
-version: 1.0.0
-category: General
-tags: []
-author: AIPOCH
+description: Use when planning conference schedules, optimizing session selection at scientific meetings, managing time between presentations, or maximizing networking at academic conferences. Creates personalized schedules balancing learning, networking, and career development for medical and scientific conferences.
+allowed-tools: "Read Write Bash Edit"
 license: MIT
-status: Draft
-risk_level: Medium
-skill_type: Tool/Script
-owner: AIPOCH
-reviewer: ''
-last_updated: '2026-02-06'
+metadata:
+  skill-author: AIPOCH
+  version: "1.0"
 ---
 
 # Conference Schedule Optimizer
 
-Generate optimal conference listening schedules based on topic interests, avoiding conflicts.
+Create optimal conference schedules balancing learning, networking, and career development for scientific and medical conferences.
 
-## Usage
+## Quick Start
+
+```python
+from scripts.schedule_optimizer import ConferenceScheduler
+
+scheduler = ConferenceScheduler()
+
+# Generate optimized schedule
+schedule = scheduler.optimize(
+    conference="ASHG2024",
+    interests=["genomics", "bioinformatics", "rare diseases"],
+    constraints={"avoid_mornings": True, "networking_priority": "high"}
+)
+
+# Export to calendar
+scheduler.export(schedule, format="ical", filename="my_conference.ics")
+```
+
+## Core Capabilities
+
+### 1. Session Prioritization
+
+```python
+priorities = scheduler.prioritize_sessions(
+    sessions=conference_sessions,
+    criteria={
+        "topic_relevance": 0.35,
+        "speaker_reputation": 0.25,
+        "career_value": 0.20,
+        "networking_opportunity": 0.20
+    }
+)
+```
+
+**Prioritization Matrix:**
+
+| Factor | Weight | How Measured |
+|--------|--------|--------------|
+| Topic Relevance | 35% | Keyword matching with your research |
+| Speaker Impact | 25% | Citation count, h-index, previous talks |
+| Career Value | 20% | Job opportunities, collaborations |
+| Networking | 20% | Attendee overlap, social events |
+
+### 2. Schedule Optimization
+
+```python
+optimized_schedule = scheduler.create_schedule(
+    sessions=priorities,
+    constraints={
+        "max_consecutive_sessions": 3,
+        "lunch_break": "12:00-13:00",
+        "must_attend": ["Keynote: Dr. Smith", "Workshop: CRISPR"],
+        "avoid": ["conflict_of_interest_sessions"]
+    }
+)
+```
+
+### 3. Conflict Resolution
+
+```python
+resolved = scheduler.resolve_conflicts(
+    overlapping_sessions=[session_a, session_b],
+    strategy="attend_record_delegate"
+)
+```
+
+**Conflict Resolution Strategies:**
+
+| Strategy | Best For | Implementation |
+|----------|----------|----------------|
+| Attend + Record | High-priority talk | Attend live, watch recording later |
+| Split Time | Equal priority | 20 min each, network after |
+| Delegate | Team attending | Colleague attends, shares notes |
+| Poster Alternative | Overlapping talks | Visit presenter's poster session |
+
+### 4. Networking Planner
+
+```python
+networking_blocks = scheduler.plan_networking(
+    target_attendees=[
+        {"name": "Dr. Smith", "institution": "Stanford", "topic": "Genomics"},
+        {"name": "Prof. Johnson", "institution": "Broad", "topic": "CRISPR"}
+    ],
+    strategy="coffee_chats",
+    buffer_minutes=15
+)
+```
+
+**Networking Tactics:**
+- **Coffee Chats**: Schedule 15-min meetings before/after sessions
+- **Poster Sessions**: High-quality conversations in relaxed setting
+- **Social Events**: Evening receptions for informal networking
+- **Twitter/X**: Live-tweet to connect with remote attendees
+
+### 5. Travel Time Calculator
+
+```python
+schedule_with_travel = scheduler.add_travel_time(
+    base_schedule,
+    venue_map="conference_center.pdf",
+    walking_speed="normal",  # or "slow" with poster tubes
+    buffer_percent=20
+)
+```
+
+## CLI Usage
 
 ```bash
-python scripts/main.py --interests "genomics,AI,drug-discovery" --schedule schedule.json
+# Optimize from conference program PDF
+python scripts/schedule_optimizer.py \
+  --program ashg2024_program.pdf \
+  --interests "genomics,bioinformatics,ethics" \
+  --constraints "no_mornings,prefer_posters" \
+  --output my_schedule.ics
+
+# Real-time update with room changes
+python scripts/schedule_optimizer.py \
+  --conference ASHG2024 \
+  --update --notify
+
+# Generate networking targets
+python scripts/schedule_optimizer.py \
+  --conference ASHG2024 \
+  --mode networking \
+  --my-research "rare disease genomics" \
+  --output targets.csv
 ```
 
-## Parameters
+## Common Patterns
 
-| Parameter | Type | Default | Required | Description |
-|-----------|------|---------|----------|-------------|
-| `--interests`, `-i` | string | - | Yes | Comma-separated topic interests |
-| `--schedule`, `-s` | string | - | Yes | Conference schedule JSON file |
-| `--must-attend`, `-m` | string | - | No | Comma-separated must-attend session IDs |
-| `--output`, `-o` | string | - | No | Optimized schedule output file |
+### Pattern 1: First-Time Attendee
 
-### Input JSON Format
+**Goal**: Maximize learning, minimize overwhelm
 
-```json
-{
-  "sessions": [
-    {
-      "id": "S001",
-      "title": "Session Title",
-      "start": "2026-03-15T09:00:00",
-      "topics": ["genomics", "AI"],
-      "room": "Hall A"
-    }
-  ]
-}
+```python
+schedule = scheduler.optimize(
+    conference="ISMRM2024",
+    experience_level="first_time",
+    strategy="breadth_over_depth",
+    include_tutorials=True,
+    social_events_priority="high"
+)
 ```
 
-## Features
+### Pattern 2: Job Seeker
 
-- Automatic conflict detection
-- Topic relevance scoring
-- Travel time between rooms
-- Personal schedule export
+**Goal**: Network with target institutions
 
-## Output
+```python
+schedule = scheduler.optimize(
+    conference="SFN2024",
+    goals=["job_search", "networking"],
+    target_institutions=["NIH", "Stanford", "Genentech"],
+    career_sessions_priority="must_attend"
+)
+```
 
-- Optimized personal schedule
-- Conflict warnings
-- Alternative suggestions
+### Pattern 3: Poster Presenter
 
-## Risk Assessment
+**Goal**: Balance presenting with attending
 
-| Risk Indicator | Assessment | Level |
-|----------------|------------|-------|
-| Code Execution | Python/R scripts executed locally | Medium |
-| Network Access | No external API calls | Low |
-| File System Access | Read input files, write output files | Medium |
-| Instruction Tampering | Standard prompt guidelines | Low |
-| Data Exposure | Output files saved to workspace | Low |
+```python
+schedule = scheduler.optimize(
+    conference="AGU2024",
+    my_poster_session="Tuesday 2-4pm",
+    conflicts_strategy="skip_lower_priority",
+    networking_during_poster=True
+)
+```
 
-## Security Checklist
+## Quality Checklist
 
-- [ ] No hardcoded credentials or API keys
-- [ ] No unauthorized file system access (../)
-- [ ] Output does not expose sensitive information
-- [ ] Prompt injection protections in place
-- [ ] Input file paths validated (no ../ traversal)
-- [ ] Output directory restricted to workspace
-- [ ] Script execution in sandboxed environment
-- [ ] Error messages sanitized (no stack traces exposed)
-- [ ] Dependencies audited
-## Prerequisites
+**Pre-Conference (2 weeks before):**
+- [ ] Download conference app/program
+- [ ] Flag 3 "must-attend" sessions per day
+- [ ] Identify 5-10 people to meet
+- [ ] Schedule non-conference meetings outside conference hours
+- [ ] Download and review key papers from speakers
 
-No additional Python packages required.
+**During Conference:**
+- [ ] Check schedule each morning for updates
+- [ ] Take notes in unified location (app or notebook)
+- [ ] Block 30-min daily for exhibit hall
+- [ ] Stay hydrated and take walking breaks
+- [ ] Tweet key insights (tag speakers, use conference hashtag)
 
-## Evaluation Criteria
+**Post-Conference (within 48 hours):**
+- [ ] Email new contacts with specific follow-up
+- [ ] Organize notes by actionable items
+- [ ] Share key learnings with lab/team
+- [ ] Update CV with conference activities
 
-### Success Metrics
-- [ ] Successfully executes main functionality
-- [ ] Output meets quality standards
-- [ ] Handles edge cases gracefully
-- [ ] Performance is acceptable
+## Common Pitfalls
 
-### Test Cases
-1. **Basic Functionality**: Standard input → Expected output
-2. **Edge Case**: Invalid input → Graceful error handling
-3. **Performance**: Large dataset → Acceptable processing time
+❌ **Over-scheduling**: No breaks between sessions
+✅ **Buffer time**: 15-min gaps for transitions and networking
 
-## Lifecycle Status
+❌ **Session hopping**: Leaving talks early
+✅ **Commit fully**: Attend entire session or don't go
 
-- **Current Stage**: Draft
-- **Next Review Date**: 2026-03-06
-- **Known Issues**: None
-- **Planned Improvements**: 
-  - Performance optimization
-  - Additional feature support
+❌ **Skipping meals**: Running from session to session
+✅ **Scheduled breaks**: Block lunch, rest, and processing time
+
+---
+
+**Skill ID**: 206 | **Version**: 1.0 | **License**: MIT

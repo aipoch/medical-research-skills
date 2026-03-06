@@ -1,0 +1,11 @@
+{
+  "name": "aipoch/discussion-section-architect",
+  "version": "0.1.0",
+  "private": true,
+  "summary": "Use when working with discussion section architect",
+  "skills": {
+    "discussion-section-architect": {
+      "path": "SKILL.md"
+    }
+  }
+}

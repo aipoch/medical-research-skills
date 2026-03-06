@@ -1,0 +1,11 @@
+{
+  "name": "aipoch/conference-schedule-optimizer",
+  "version": "0.1.0",
+  "private": true,
+  "summary": "Use when planning conference schedules, optimizing session selection, managing time between presentations, or networking at academic conferences.",
+  "skills": {
+    "conference-schedule-optimizer": {
+      "path": "SKILL.md"
+    }
+  }
+}

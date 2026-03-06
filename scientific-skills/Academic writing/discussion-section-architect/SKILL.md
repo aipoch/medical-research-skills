@@ -1,88 +1,131 @@
 ---
 name: discussion-section-architect
-description: Guided framework for structuring academic Discussion sections
-version: 1.0.0
-category: Writing
-tags: []
-author: AIPOCH
+description: Structures and writes discussion sections for academic papers and research reports. Use when writing a discussion section, interpreting research results, connecting findings to existing literature, addressing study limitations, synthesizing conclusions, or drafting any part of an academic discussion. Helps researchers organize arguments, contextualize data, and produce clear, publication-ready discussion prose.
+allowed-tools: "Read Write Bash Edit"
 license: MIT
-status: Draft
-risk_level: Medium
-skill_type: Tool/Script
-owner: AIPOCH
-reviewer: ''
-last_updated: '2026-02-06'
+metadata:
+  skill-author: AIPOCH
+  version: "1.0"
 ---
 
 # Discussion Section Architect
 
-Structured framework for writing Discussion sections.
+## Quick Start
 
-## Use Cases
-- Manuscript discussion writing
-- Thesis discussion chapters
-- Organizing complex findings
+1. Provide your **research question**, **key results**, and any **prior literature** you want to reference.
+2. Choose a structure (see workflows below).
+3. Generate a draft discussion section with clearly organized subsections.
+4. Run the **Draft → Revise loop** (see below).
 
-## Parameters
+---
 
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `findings` | list[str] | Yes | - | Key results to discuss |
-| `literature_context` | str | No | - | Relevant prior work summary |
-| `limitations` | list[str] | No | - | Study limitations to address |
-| `implications` | list[str] | No | - | Clinical or research implications |
+## Core Capabilities
 
-## Returns
-- Structured discussion outline
-- Paragraph-by-paragraph guidance
-- Connection suggestions
+### 1. Interpret and Contextualize Results
 
-## Example
-Guides: Summary → Literature comparison → Mechanism → Limitations → Future directions
+- State whether results support or contradict the original hypothesis.
+- Explain unexpected findings with reasoned interpretations.
+- Quantify effect sizes or patterns when relevant.
 
-## Risk Assessment
+**Example prompt input:**
+```
+Results: Group A showed a 23% reduction in symptom severity (p=0.003) vs. control.
+Hypothesis: Intervention would reduce symptom severity.
+Task: Interpret this result for the discussion section.
+```
 
-| Risk Indicator | Assessment | Level |
-|----------------|------------|-------|
-| Code Execution | Python/R scripts executed locally | Medium |
-| Network Access | No external API calls | Low |
-| File System Access | Read input files, write output files | Medium |
-| Instruction Tampering | Standard prompt guidelines | Low |
-| Data Exposure | Output files saved to workspace | Low |
+**Example output excerpt:**
+```
+The 23% reduction in symptom severity (p=0.003) supports the primary hypothesis.
+This effect size is clinically meaningful and consistent with the mechanistic
+rationale proposed in the introduction...
+```
 
-## Security Checklist
+---
 
-- [ ] No hardcoded credentials or API keys
-- [ ] No unauthorized file system access (../)
-- [ ] Output does not expose sensitive information
-- [ ] Prompt injection protections in place
-- [ ] Input file paths validated (no ../ traversal)
-- [ ] Output directory restricted to workspace
-- [ ] Script execution in sandboxed environment
-- [ ] Error messages sanitized (no stack traces exposed)
-- [ ] Dependencies audited
-## Prerequisites
+### 2. Connect Findings to Existing Literature
 
-No additional Python packages required.
+- Identify studies that corroborate the findings.
+- Highlight where results diverge from prior literature and offer explanations.
+- Use hedged academic language appropriate to the field.
 
-## Evaluation Criteria
+**Example:**
+```
+Finding: Effect was stronger in older participants.
+Literature: Smith et al. (2019) found age-moderated responses in a similar cohort.
+Task: Connect finding to literature.
+```
 
-### Success Metrics
-- [ ] Successfully executes main functionality
-- [ ] Output meets quality standards
-- [ ] Handles edge cases gracefully
-- [ ] Performance is acceptable
+**Output:**
+```
+The age-moderated effect aligns with Smith et al. (2019), who reported attenuated
+responses in younger adults. One possible explanation is differential receptor
+sensitivity across age groups, as suggested by...
+```
 
-### Test Cases
-1. **Basic Functionality**: Standard input → Expected output
-2. **Edge Case**: Invalid input → Graceful error handling
-3. **Performance**: Large dataset → Acceptable processing time
+---
 
-## Lifecycle Status
+### 3. Address Limitations
 
-- **Current Stage**: Draft
-- **Next Review Date**: 2026-03-06
-- **Known Issues**: None
-- **Planned Improvements**: 
-  - Performance optimization
-  - Additional feature support
+Draft a limitations subsection that is honest but does not undermine the contribution:
+
+```
+Limitation: [Describe constraint]
+Impact: [How it affects interpretation]
+Mitigation / Future direction: [How it could be addressed]
+```
+
+---
+
+### 4. Synthesize Conclusions
+
+Generate a closing paragraph that:
+
+- Restates the core finding in plain language.
+- States the theoretical or practical contribution.
+- Ends with a forward-looking statement about implications or next steps.
+
+---
+
+## Recommended Discussion Structure
+
+```
+1. Opening: Restate the research question and summarize the key finding (2–3 sentences).
+2. Interpretation: Explain what the results mean mechanistically or theoretically.
+3. Comparison to Literature: Agree/contrast with prior studies; explain divergences.
+4. Implications: Theoretical contributions and/or practical applications.
+5. Limitations: Honest scope boundaries with future directions.
+6. Conclusion: Synthesis and forward-looking close.
+```
+
+---
+
+## Draft → Revise Loop
+
+Use this iterative workflow after generating an initial draft:
+
+**Step 1 — Draft**: Generate the full discussion section using the structure above.
+
+**Step 2 — Check**: Review against the checklist:
+- [ ] Each finding from the Results section is explicitly addressed.
+- [ ] Claims are supported by citations or logical reasoning — not stated as facts.
+- [ ] Unexpected or null results are acknowledged and interpreted.
+- [ ] Limitations are stated without dismissing the study's contribution.
+- [ ] No new data or results are introduced in the discussion.
+- [ ] Hedged language used appropriately (e.g., "suggests," "indicates," "may reflect").
+- [ ] Conclusion ties back to the original research question.
+
+**Step 3 — Revise**: For each failed checklist item, revise only the affected paragraph(s).
+
+**Step 4 — Re-check**: Re-run the checklist on revised paragraphs to confirm resolution before finalizing.
+
+---
+
+## References
+
+- `references/guide.md` - Detailed documentation
+- `references/examples/` - Sample inputs and outputs
+
+---
+
+**Skill ID**: 950 | **Version**: 1.0 | **License**: MIT

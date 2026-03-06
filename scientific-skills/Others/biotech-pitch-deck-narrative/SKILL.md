@@ -1,13 +1,11 @@
 ---
 name: biotech-pitch-deck-narrative
-description: Transform complex scientific and clinical data into compelling investor 
-  narratives for biotech fundraising. Converts technical terminology into business value 
-  propositions, optimizes pitch deck structure, and prepares Q&A for different funding 
-  stages and investor types.
-allowed-tools: [Read, Write, Bash, Edit]
+description: Use when creating biotech pitch decks, translating scientific data for investors, preparing fundraising presentations, or developing investor Q&A. Transforms complex scientific and clinical data into compelling investor narratives for biotech fundraising.
+allowed-tools: "Read Write Bash Edit"
 license: MIT
 metadata:
-    skill-author: AIPOCH
+  skill-author: AIPOCH
+  version: "1.0"
 ---
 
 # Biotech Pitch Deck Narrative

@@ -1,92 +1,103 @@
 ---
 name: irb-application-assistant
-description: Draft IRB applications with focus on risk/benefit and privacy protection
-version: 1.0.0
-category: Pharma
-tags: []
-author: AIPOCH
+description: Assists researchers with Institutional Review Board (IRB) application tasks, including drafting informed consent documents, reviewing research protocols for compliance, generating application forms, and preparing submission checklists. Use when the user mentions IRB, Institutional Review Board, research ethics, human subjects research, protocol review, informed consent, or needs help preparing or reviewing an IRB application or submission.
+allowed-tools: "Read Write Bash Edit"
 license: MIT
-status: Draft
-risk_level: Medium
-skill_type: Tool/Script
-owner: AIPOCH
-reviewer: ''
-last_updated: '2026-02-06'
+metadata:
+  skill-author: AIPOCH
+  version: "1.0"
 ---
 
 # IRB Application Assistant
 
-Ethics committee application support.
+Helps researchers prepare, review, and submit Institutional Review Board (IRB) applications. Supports drafting informed consent templates, checking protocol compliance, generating application documents, and guiding researchers through the submission workflow.
 
-## Use Cases
-- Initial IRB submissions
-- Amendment drafting
-- Continuing review renewal
-- Multi-site ethics coordination
+## Quick Start
 
-## Parameters
+```bash
+# Generate an informed consent template
+python scripts/main.py --task consent --protocol protocol.json --output consent_form.docx
 
-| Parameter | Type | Default | Required | Description |
-|-----------|------|---------|----------|-------------|
-| `--study-type` | string | - | Yes | Study type (Observational or Interventional) |
-| `--population` | string | - | Yes | Target population description |
-| `--vulnerable-groups` | flag | false | No | Whether vulnerable populations are involved |
-| `--procedures` | string | - | Yes | Research procedures/activities |
-| `--output`, `-o` | string | stdout | No | Output file path |
-| `--format` | string | text | No | Output format (text, markdown, docx) |
+# Run a compliance check on a research protocol
+python scripts/main.py --task compliance-check --protocol protocol.json --verbose
 
-## Returns
-- Risk/benefit analysis text
-- Privacy protection measures
-- Informed consent highlights
-- 3Rs justification (animal)
+# Generate a full IRB application package
+python scripts/main.py --task generate-application --config study_config.json --output irb_package/
+```
 
-## Example
-Generates: "The risk of blood draw is minimal..."
+## Core Capabilities
 
-## Risk Assessment
+### 1. Generate Informed Consent Documents
 
-| Risk Indicator | Assessment | Level |
-|----------------|------------|-------|
-| Code Execution | Python/R scripts executed locally | Medium |
-| Network Access | No external API calls | Low |
-| File System Access | Read input files, write output files | Medium |
-| Instruction Tampering | Standard prompt guidelines | Low |
-| Data Exposure | Output files saved to workspace | Low |
+Produces compliant informed consent forms based on study parameters such as participant population, risk level, and study type.
 
-## Security Checklist
+```bash
+python scripts/main.py --task consent \
+  --protocol protocol.json \
+  --population "adults 18+" \
+  --risk-level minimal \
+  --output consent_form.docx
+```
 
-- [ ] No hardcoded credentials or API keys
-- [ ] No unauthorized file system access (../)
-- [ ] Output does not expose sensitive information
-- [ ] Prompt injection protections in place
-- [ ] Input file paths validated (no ../ traversal)
-- [ ] Output directory restricted to workspace
-- [ ] Script execution in sandboxed environment
-- [ ] Error messages sanitized (no stack traces exposed)
-- [ ] Dependencies audited
-## Prerequisites
+### 2. Protocol Compliance Review
 
-No additional Python packages required.
+Checks a research protocol against IRB requirements and flags missing or non-compliant sections.
 
-## Evaluation Criteria
+```bash
+python scripts/main.py --task compliance-check \
+  --protocol protocol.json \
+  --ruleset federal-common-rule \
+  --output compliance_report.txt
+```
 
-### Success Metrics
-- [ ] Successfully executes main functionality
-- [ ] Output meets quality standards
-- [ ] Handles edge cases gracefully
-- [ ] Performance is acceptable
+### 3. Application Form Generation
 
-### Test Cases
-1. **Basic Functionality**: Standard input → Expected output
-2. **Edge Case**: Invalid input → Graceful error handling
-3. **Performance**: Large dataset → Acceptable processing time
+Generates completed IRB application forms (e.g., initial review, continuing review, amendment) from structured study data.
 
-## Lifecycle Status
+```bash
+python scripts/main.py --task generate-application \
+  --form-type initial-review \
+  --config study_config.json \
+  --output irb_application.docx
+```
 
-- **Current Stage**: Draft
-- **Next Review Date**: 2026-03-06
-- **Known Issues**: None
-- **Planned Improvements**: 
-  - Performance optimization
-  - Additional feature support
+### 4. Submission Checklist Validation
+
+Validates that all required documents and fields are present before submission.
+
+```bash
+python scripts/main.py --task validate-submission \
+  --package irb_package/ \
+  --output validation_report.txt
+```
+
+## Recommended Workflow
+
+Follow these steps for a complete IRB submission:
+
+1. **Prepare study configuration** — Populate `study_config.json` with study title, PI details, participant population, risk level, and procedures.
+2. **Run compliance check** — Use `--task compliance-check` to identify gaps in the protocol before drafting documents.
+   - ⛔ **Checkpoint**: If the compliance report flags ANY errors, resolve ALL flagged items and re-run `--task compliance-check` before proceeding. Do not advance to step 3 with unresolved compliance errors.
+3. **Generate consent document** — Use `--task consent` to produce a compliant informed consent form tailored to the study.
+4. **Generate application forms** — Use `--task generate-application` to produce the required IRB submission forms.
+5. **Validate submission package** — Use `--task validate-submission` to confirm all required documents are present and fields are complete.
+   - ⛔ **Checkpoint**: If validation fails, follow this loop: review errors in `validation_report.txt` → fix each issue → re-run `--task validate-submission` → only proceed when the report shows zero blocking errors.
+6. **Review and submit** — Manually review any remaining warnings in the compliance and validation reports before submitting to the IRB.
+
+## Quality Checklist
+
+- [ ] Protocol includes all required sections (purpose, procedures, risks, benefits, confidentiality)
+- [ ] Informed consent language is at appropriate reading level for participant population
+- [ ] Risk level classification is justified and documented
+- [ ] All required attachments (recruitment materials, surveys, data management plan) are included
+- [ ] Compliance report reviewed and all flagged items resolved
+- [ ] Submission package validated with zero blocking errors
+
+## References
+
+- `references/guide.md` — Detailed documentation and field descriptions
+- `references/examples/` — Sample protocols, consent forms, and completed applications
+
+---
+
+**Skill ID**: 952 | **Version**: 1.0 | **License**: MIT

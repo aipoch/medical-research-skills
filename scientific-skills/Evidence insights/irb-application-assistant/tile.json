@@ -1,0 +1,11 @@
+{
+  "name": "aipoch/irb-application-assistant",
+  "version": "0.1.0",
+  "private": true,
+  "summary": "Use when working with irb application assistant",
+  "skills": {
+    "irb-application-assistant": {
+      "path": "SKILL.md"
+    }
+  }
+}

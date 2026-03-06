@@ -1,93 +1,130 @@
 ---
 name: patient-consent-simplifier
-description: Rewrite legal-jargon consent forms to 5th-grade reading level
-version: 1.0.0
-category: Clinical
-tags: []
-author: AIPOCH
+description: Use when simplifying informed consent documents, translating medical procedures for patients, creating patient-friendly research summaries, or adapting clinical trial information for lay audiences. Maintains regulatory compliance while improving readability.
+allowed-tools: "Read Write Bash Edit"
 license: MIT
-status: Draft
-risk_level: Medium
-skill_type: Tool/Script
-owner: AIPOCH
-reviewer: ''
-last_updated: '2026-02-06'
+metadata:
+  skill-author: AIPOCH
+  version: "1.0"
 ---
 
 # Patient Consent Simplifier
 
-Rewrite legally-dense informed consent forms to 5th-grade reading level for patient comprehension.
+Transform complex informed consent documents into patient-friendly language while maintaining regulatory compliance and ethical standards.
 
-## Usage
+## Quick Start
 
-```bash
-python scripts/main.py --input consent_form.pdf --output simple_consent.txt
-python scripts/main.py --text "You hereby authorize..." --simplify
+```python
+from scripts.consent_simplifier import ConsentSimplifier
+
+simplifier = ConsentSimplifier()
+
+# Simplify consent form
+simplified = simplifier.simplify(
+    document="clinical_trial_consent.pdf",
+    reading_level="8th_grade",
+    preserve_legal=True
+)
 ```
 
-## Parameters
+## Core Capabilities
 
-- `--input`: Input consent form (PDF/TXT/DOCX)
-- `--text`: Direct text input
-- `--output`: Output file
-- `--target-grade`: Target reading grade (default: 5)
+### 1. Document Simplification
 
-## Features
+```python
+result = simplifier.simplify_section(
+    section="procedure_description",
+    text="Lumbar puncture will be performed under sterile conditions...",
+    max_sentences=3
+)
+```
 
-- Simplifies medical/legal terminology
-- Shortens complex sentences
-- Adds explanatory notes
-- Maintains legal accuracy
+**Simplification Rules:**
+- Break long sentences (>20 words)
+- Replace medical jargon with common terms
+- Use active voice
+- Add visual aids placeholders
+- Maintain key legal elements
 
-## Output
+### 2. Risk/Benefit Clarification
 
-- Simplified consent form
-- Readability score before/after
-- List of key terms explained
+```python
+risks = simplifier.clarify_risks(
+    original_text="Potential adverse events include...",
+    format="table",
+    severity_scale="emoji"  # or "color", "text"
+)
+```
 
-## Risk Assessment
+**Risk Presentation:**
+| Risk | Likelihood | Severity |
+|------|-----------|----------|
+| Headache | Common (1 in 10) | Mild 😊 |
+| Infection | Rare (1 in 1000) | Serious ⚠️ |
 
-| Risk Indicator | Assessment | Level |
-|----------------|------------|-------|
-| Code Execution | Python/R scripts executed locally | Medium |
-| Network Access | No external API calls | Low |
-| File System Access | Read input files, write output files | Medium |
-| Instruction Tampering | Standard prompt guidelines | Low |
-| Data Exposure | Output files saved to workspace | Low |
+### 3. Reading Level Assessment
 
-## Security Checklist
+```python
+metrics = simplifier.assess_readability(document)
+print(f"Current grade level: {metrics.grade_level}")
+print(f"Suggested improvements: {metrics.suggestions}")
+```
 
-- [ ] No hardcoded credentials or API keys
-- [ ] No unauthorized file system access (../)
-- [ ] Output does not expose sensitive information
-- [ ] Prompt injection protections in place
-- [ ] Input file paths validated (no ../ traversal)
-- [ ] Output directory restricted to workspace
-- [ ] Script execution in sandboxed environment
-- [ ] Error messages sanitized (no stack traces exposed)
-- [ ] Dependencies audited
-## Prerequisites
+**Target Levels:**
+- **General population**: 8th grade
+- **Vulnerable populations**: 6th grade
+- **Health literacy challenges**: 4th-5th grade
 
-No additional Python packages required.
+### 4. Regulatory Compliance Check
 
-## Evaluation Criteria
+```python
+compliance = simplifier.check_compliance(
+    simplified_document,
+    regulations=["FDA_21CFR50", "ICH-GCP", "HIPAA"]
+)
+```
 
-### Success Metrics
-- [ ] Successfully executes main functionality
-- [ ] Output meets quality standards
-- [ ] Handles edge cases gracefully
-- [ ] Performance is acceptable
+**Required Elements:**
+- [ ] Purpose of research
+- [ ] Procedures involved
+- [ ] Risks and discomforts
+- [ ] Benefits
+- [ ] Alternatives
+- [ ] Confidentiality
+- [ ] Compensation
+- [ ] Contact information
+- [ ] Voluntary participation
 
-### Test Cases
-1. **Basic Functionality**: Standard input → Expected output
-2. **Edge Case**: Invalid input → Graceful error handling
-3. **Performance**: Large dataset → Acceptable processing time
+## CLI Usage
 
-## Lifecycle Status
+```bash
+# Simplify PDF
+python scripts/consent_simplifier.py \
+  --input consent_form.pdf \
+  --output simplified_consent.pdf \
+  --grade-level 8
 
-- **Current Stage**: Draft
-- **Next Review Date**: 2026-03-06
-- **Known Issues**: None
-- **Planned Improvements**: 
-  - Performance optimization
-  - Additional feature support
+# Check compliance only
+python scripts/consent_simplifier.py \
+  --check compliance \
+  --input document.pdf
+```
+
+## Best Practices
+
+**Do:**
+- Use "you" and "your"
+- Define terms on first use
+- Use bullet points for lists
+- Include visual aids
+- Test with patient advocates
+
+**Don't:**
+- Remove required legal elements
+- Downplay significant risks
+- Use coercive language
+- Exceed recommended length
+
+---
+
+**Skill ID**: 208 | **Version**: 1.0 | **License**: MIT

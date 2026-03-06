@@ -1,91 +1,87 @@
 ---
 name: journal-cover-prompter
-description: Generate AI art prompts for scientific journal cover designs
-version: 1.0.0
-category: Visual
-tags: []
-author: AIPOCH
+description: Use when creating journal cover images, generating scientific artwork prompts, or designing graphical abstracts. Creates detailed prompts for AI image generators to produce publication-quality scientific visuals.
+allowed-tools: "Read Write Bash Edit"
 license: MIT
-status: Draft
-risk_level: Medium
-skill_type: Tool/Script
-owner: AIPOCH
-reviewer: ''
-last_updated: '2026-02-06'
+metadata:
+  skill-author: AIPOCH
+  version: "1.0"
 ---
 
-# Journal Cover Prompter
+# Journal Cover Image Prompter
 
-Scientific cover art prompt engineering.
+Generate detailed prompts for creating scientific journal cover images and graphical abstracts using AI image generators.
 
-## Use Cases
-- Cover art competitions
-- Social media graphics
-- Presentation visuals
-- Press release images
+## Quick Start
 
-## Parameters
+```python
+from scripts.cover_prompter import CoverPrompter
 
-| Parameter | Type | Default | Required | Description |
-|-----------|------|---------|----------|-------------|
-| `--abstract` | string | - | Yes | Paper abstract or summary |
-| `--key-finding` | string | - | Yes | Main discovery or key result |
-| `--visual-style` | string | artistic | No | Visual style (realistic, abstract, artistic) |
-| `--journal-target` | string | - | No | Target journal (Cell, Nature, Science) |
-| `--output`, `-o` | string | stdout | No | Output file path |
+prompter = CoverPrompter()
 
-## Returns
-- Midjourney prompt
-- DALL-E prompt
-- Composition suggestions
-- Color palette ideas
+# Generate prompt
+prompt = prompter.create_prompt(
+    research_topic="CRISPR gene editing",
+    visual_style="photorealistic",
+    mood="hopeful",
+    key_elements=["DNA strands", "molecular scissors", "cells"]
+)
+```
 
-## Example
-"Protein structure with DNA helix, bioluminescent colors..."
+## Core Capabilities
 
-## Risk Assessment
+### 1. Prompt Generation
 
-| Risk Indicator | Assessment | Level |
-|----------------|------------|-------|
-| Code Execution | Python/R scripts executed locally | Medium |
-| Network Access | No external API calls | Low |
-| File System Access | Read input files, write output files | Medium |
-| Instruction Tampering | Standard prompt guidelines | Low |
-| Data Exposure | Output files saved to workspace | Low |
+```python
+prompt = prompter.generate(
+    subject="cancer immunotherapy",
+    style="scientific illustration",
+    color_scheme="blue_gradient",
+    complexity="high"
+)
+```
 
-## Security Checklist
+**Prompt Structure:**
+- Subject description
+- Artistic style
+- Color palette
+- Lighting and mood
+- Technical specifications
 
-- [ ] No hardcoded credentials or API keys
-- [ ] No unauthorized file system access (../)
-- [ ] Output does not expose sensitive information
-- [ ] Prompt injection protections in place
-- [ ] Input file paths validated (no ../ traversal)
-- [ ] Output directory restricted to workspace
-- [ ] Script execution in sandboxed environment
-- [ ] Error messages sanitized (no stack traces exposed)
-- [ ] Dependencies audited
-## Prerequisites
+### 2. Style Selection
 
-No additional Python packages required.
+```python
+style_guide = prompter.select_style(
+    journal_type="nature",
+    subject_matter="molecular_biology"
+)
+```
 
-## Evaluation Criteria
+**Journal Styles:**
+- Nature: Dramatic, artistic
+- Cell: Clean, molecular focus
+- Science: Conceptual, broad appeal
+- Medical journals: Clinical, professional
 
-### Success Metrics
-- [ ] Successfully executes main functionality
-- [ ] Output meets quality standards
-- [ ] Handles edge cases gracefully
-- [ ] Performance is acceptable
+### 3. Technical Specs
 
-### Test Cases
-1. **Basic Functionality**: Standard input → Expected output
-2. **Edge Case**: Invalid input → Graceful error handling
-3. **Performance**: Large dataset → Acceptable processing time
+```python
+specs = prompter.get_specs(
+    journal="Nature",
+    cover_type="front"
+)
+# Returns dimensions, resolution, color mode
+```
 
-## Lifecycle Status
+## CLI Usage
 
-- **Current Stage**: Draft
-- **Next Review Date**: 2026-03-06
-- **Known Issues**: None
-- **Planned Improvements**: 
-  - Performance optimization
-  - Additional feature support
+```bash
+python scripts/cover_prompter.py \
+  --topic "neuroscience synaptic transmission" \
+  --style artistic \
+  --output prompt.txt
+```
+
+---
+
+**Skill ID**: 211 | **Version**: 1.0 | **License**: MIT

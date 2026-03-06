@@ -1,92 +1,121 @@
 ---
 name: key-takeaways
-description: Extracts 3-5 core conclusions from lengthy medical documents or PDFs.
-version: 1.0.0
-category: Info
-tags:
-- summary
-- key-points
-- document-analysis
-author: AIPOCH
+description: Extracts and summarizes key takeaways from documents, meeting notes, articles, and other text content. Use when the user asks for summaries, bullet points, main points, highlights, or a TL;DR of any document or body of text. Produces structured outputs such as numbered lists, executive summaries, and action items. Supports configurable output formats including JSON export for downstream use.
+allowed-tools: "Read Write Bash Edit"
 license: MIT
-status: Draft
-risk_level: Medium
-skill_type: Tool/Script
-owner: AIPOCH
-reviewer: ''
-last_updated: '2026-02-06'
+metadata:
+  skill-author: AIPOCH
+  version: "1.0"
 ---
 
 # Key Takeaways
 
-Extracts essential conclusions from medical documents.
+Extracts and presents the most important points from any body of text — meeting notes, articles, reports, or documents — as concise, structured takeaways. Supports multiple output formats and is configurable for audience or depth.
 
-## Features
+## Quick Start
 
-- Automatic key point extraction
-- Priority ranking
-- Concise bullet points
-- Multi-document support
+```python
+from scripts.main import Key_Takeaways
 
-## Input Parameters
+# Initialize
+tool = Key_Takeaways()
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `document` | str | Yes | Document text |
-| `num_takeaways` | int | No | Number of points (default: 5) |
+# Extract key takeaways from a document
+result = tool.process("meeting_notes.txt")
 
-## Output Format
+# Export as structured JSON
+tool.export(result, format="json")
+```
 
+## Core Capabilities
+
+### 1. Extract key points from text
+
+```python
+# Read source document and extract top takeaways
+result = tool.process("quarterly_report.txt")
+# Returns: [{"point": "Revenue grew 12% YoY", "source_line": 4}, ...]
+```
+
+### 2. Generate structured summaries
+
+```python
+# Generate a bullet-point executive summary
+result = tool.process("meeting_notes.txt", style="executive")
+# Returns: {"summary": "...", "action_items": [...], "decisions": [...]}
+```
+
+### 3. Configure output depth and audience
+
+```python
+# Adjust number of takeaways and target audience
+result = tool.process("article.txt", max_points=5, audience="non-technical")
+```
+
+### 4. Export results
+
+```python
+# Export takeaways to JSON or plain text
+tool.export(result, format="json", output_path="takeaways.json")
+tool.export(result, format="txt",  output_path="takeaways.txt")
+```
+
+## CLI Usage
+
+```bash
+# Extract key takeaways from a file
+python scripts/main.py --input document.txt --output takeaways.txt
+
+# Use a config file to set depth, audience, and format
+python scripts/main.py --input document.txt --config config.json --verbose
+
+# Batch process a directory of documents
+python scripts/main.py --batch input_dir/ --output output_dir/
+```
+
+**Batch processing notes:**
+- Verify the output directory exists before running: `mkdir -p output_dir/`
+- If processing fails on an individual file, the tool logs the error and continues with remaining files; review `output_dir/errors.log` after the run
+- After batch completion, validate all JSON outputs: `for f in output_dir/*.json; do python -m json.tool "$f" > /dev/null && echo "OK: $f" || echo "FAIL: $f"; done`
+
+## Example Input / Output
+
+**Input** (`meeting_notes.txt`):
+```
+Q3 review: Sales up 15%. New product launch delayed to Q4.
+Action: Alice to update roadmap by Friday. Budget approved for hiring.
+```
+
+**Output** (`takeaways.json`):
 ```json
 {
-  "takeaways": ["string"],
-  "source_word_count": "int"
+  "key_points": [
+    "Sales increased 15% in Q3",
+    "Product launch rescheduled to Q4"
+  ],
+  "action_items": [
+    "Alice to update roadmap by Friday"
+  ],
+  "decisions": [
+    "Budget approved for hiring"
+  ]
 }
 ```
 
-## Risk Assessment
+## Quality Checklist
 
-| Risk Indicator | Assessment | Level |
-|----------------|------------|-------|
-| Code Execution | Python/R scripts executed locally | Medium |
-| Network Access | No external API calls | Low |
-| File System Access | Read input files, write output files | Medium |
-| Instruction Tampering | Standard prompt guidelines | Low |
-| Data Exposure | Output files saved to workspace | Low |
+- [ ] Source text is readable and complete before processing
+- [ ] Output point count matches configured `max_points` setting
+- [ ] Action items and decisions are separated from general observations
+- [ ] Exported file opens and validates correctly (e.g., `python -m json.tool takeaways.json`)
+  - If JSON validation fails, check source file encoding (UTF-8 expected) and re-run; inspect `--verbose` output for parsing errors
+- [ ] Results reviewed against original source for accuracy
 
-## Security Checklist
+## References
 
-- [ ] No hardcoded credentials or API keys
-- [ ] No unauthorized file system access (../)
-- [ ] Output does not expose sensitive information
-- [ ] Prompt injection protections in place
-- [ ] Input file paths validated (no ../ traversal)
-- [ ] Output directory restricted to workspace
-- [ ] Script execution in sandboxed environment
-- [ ] Error messages sanitized (no stack traces exposed)
-- [ ] Dependencies audited
-## Prerequisites
+- `references/guide.md` - Detailed documentation
+- `references/examples/` - Sample inputs and outputs
 
-No additional Python packages required.
+---
 
-## Evaluation Criteria
-
-### Success Metrics
-- [ ] Successfully executes main functionality
-- [ ] Output meets quality standards
-- [ ] Handles edge cases gracefully
-- [ ] Performance is acceptable
-
-### Test Cases
-1. **Basic Functionality**: Standard input → Expected output
-2. **Edge Case**: Invalid input → Graceful error handling
-3. **Performance**: Large dataset → Acceptable processing time
-
-## Lifecycle Status
-
-- **Current Stage**: Draft
-- **Next Review Date**: 2026-03-06
-- **Known Issues**: None
-- **Planned Improvements**: 
-  - Performance optimization
-  - Additional feature support
+**Skill ID**: 308 | **Version**: 1.0 | **License**: MIT

@@ -1,0 +1,11 @@
+{
+  "name": "aipoch/digital-twin-discharge-drafter",
+  "version": "0.1.0",
+  "private": true,
+  "summary": "Use when drafting patient discharge summaries using digital twin technology, creating personalized discharge instructions, or generating care transition documents.",
+  "skills": {
+    "digital-twin-discharge-drafter": {
+      "path": "SKILL.md"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "aipoch/cross-disciplinary-bridge-finder",
+  "version": "0.1.0",
+  "private": true,
+  "summary": "Use when working with cross disciplinary bridge finder",
+  "skills": {
+    "cross-disciplinary-bridge-finder": {
+      "path": "SKILL.md"
+    }
+  }
+}

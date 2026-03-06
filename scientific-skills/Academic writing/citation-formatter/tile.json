@@ -1,0 +1,11 @@
+{
+  "name": "aipoch/citation-formatter",
+  "version": "0.1.0",
+  "private": true,
+  "summary": "Use when working with citation formatter",
+  "skills": {
+    "citation-formatter": {
+      "path": "SKILL.md"
+    }
+  }
+}

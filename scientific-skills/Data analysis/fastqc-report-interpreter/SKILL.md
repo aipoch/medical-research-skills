@@ -1,88 +1,124 @@
 ---
 name: fastqc-report-interpreter
-description: Interpret NGS quality control reports in plain language
-version: 1.0.0
-category: Bioinfo
-tags: []
-author: AIPOCH
+description: Use when analyzing FASTQC quality reports from sequencing data, identifying quality issues in NGS datasets, or troubleshooting sequencing problems. Interprets quality metrics and provides actionable recommendations for RNA-seq, DNA-seq, and ChIP-seq data.
+allowed-tools: "Read Write Bash Edit"
 license: MIT
-status: Draft
-risk_level: Medium
-skill_type: Tool/Script
-owner: AIPOCH
-reviewer: ''
-last_updated: '2026-02-06'
+metadata:
+  skill-author: AIPOCH
+  version: "1.0"
 ---
 
-# FastQC Report Interpreter
+# FASTQC Report Interpreter
 
-NGS QC report translation tool.
+Analyze FASTQC quality control reports for Next-Generation Sequencing (NGS) data to assess data quality and identify issues.
 
-## Use Cases
-- Novice researcher guidance
-- Troubleshooting failed runs
-- Data quality assessment
-- Pipeline optimization
+## Quick Start
 
-## Parameters
+```python
+from scripts.fastqc_interpreter import FASTQCInterpreter
 
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `fastqc_data` | str | Yes | - | FastQC report file path or content |
-| `library_type` | str | No | "DNA" | Library type: "DNA", "RNA", or "single-cell" |
+interpreter = FASTQCInterpreter()
 
-## Returns
-- Plain language explanations
-- Severity assessment (PASS/WARN/FAIL)
-- Actionable recommendations
-- Impact on downstream analysis
+# Analyze report
+analysis = interpreter.analyze("sample_fastqc.html")
+print(f"Overall Quality: {analysis.quality_status}")
+print(f"Issues Found: {analysis.issues}")
+```
 
-## Example
-"K-mer Content Fail → Adapter contamination detected → Trim adapters"
+## Core Capabilities
 
-## Risk Assessment
+### 1. Quality Metrics Analysis
 
-| Risk Indicator | Assessment | Level |
-|----------------|------------|-------|
-| Code Execution | Python/R scripts executed locally | Medium |
-| Network Access | No external API calls | Low |
-| File System Access | Read input files, write output files | Medium |
-| Instruction Tampering | Standard prompt guidelines | Low |
-| Data Exposure | Output files saved to workspace | Low |
+```python
+metrics = interpreter.parse_metrics("fastqc_data.txt")
+```
 
-## Security Checklist
+**Key Metrics:**
+| Metric | Good | Warning | Fail |
+|--------|------|---------|------|
+| Per base sequence quality | Q > 28 | Q 20-28 | Q < 20 |
+| Per sequence quality scores | Peak at Q30 | Peak Q20-30 | Peak < Q20 |
+| Per base N content | < 5% | 5-20% | > 20% |
+| Sequence duplication | < 20% | 20-50% | > 50% |
+| Adapter content | < 5% | 5-10% | > 10% |
 
-- [ ] No hardcoded credentials or API keys
-- [ ] No unauthorized file system access (../)
-- [ ] Output does not expose sensitive information
-- [ ] Prompt injection protections in place
-- [ ] Input file paths validated (no ../ traversal)
-- [ ] Output directory restricted to workspace
-- [ ] Script execution in sandboxed environment
-- [ ] Error messages sanitized (no stack traces exposed)
-- [ ] Dependencies audited
-## Prerequisites
+### 2. Issue Diagnosis
 
-No additional Python packages required.
+```python
+issues = interpreter.diagnose_issues(metrics)
+for issue in issues:
+    print(f"{issue.severity}: {issue.description}")
+    print(f"Recommendation: {issue.recommendation}")
+```
 
-## Evaluation Criteria
+**Common Issues:**
 
-### Success Metrics
-- [ ] Successfully executes main functionality
-- [ ] Output meets quality standards
-- [ ] Handles edge cases gracefully
-- [ ] Performance is acceptable
+**Low Quality at Read Ends**
+- **Cause**: Phasing effects, reagent depletion
+- **Solution**: Trim last 10-20 bases
 
-### Test Cases
-1. **Basic Functionality**: Standard input → Expected output
-2. **Edge Case**: Invalid input → Graceful error handling
-3. **Performance**: Large dataset → Acceptable processing time
+**Adapter Contamination**
+- **Cause**: Incomplete adapter removal
+- **Solution**: Re-run cutadapt/Trimmomatic with stricter parameters
 
-## Lifecycle Status
+**High Duplication**
+- **Cause**: PCR over-amplification, low input
+- **Solution**: Use deduplication; consider library prep optimization
 
-- **Current Stage**: Draft
-- **Next Review Date**: 2026-03-06
-- **Known Issues**: None
-- **Planned Improvements**: 
-  - Performance optimization
-  - Additional feature support
+**Per Base Sequence Content Bias**
+- **Cause**: Adapter dimers, non-random priming
+- **Solution**: Check for adapter contamination; randomize primers
+
+### 3. Batch Analysis
+
+```python
+batch_results = interpreter.analyze_batch(
+    fastqc_files=["sample1_fastqc.html", "sample2_fastqc.html", ...],
+    output_summary="batch_summary.csv"
+)
+```
+
+### 4. Recommendation Generation
+
+```python
+recommendations = interpreter.get_recommendations(
+    analysis,
+    application="rna_seq",  # or "dna_seq", "chip_seq"
+    quality_threshold="high"
+)
+```
+
+**Application-Specific Thresholds:**
+- **RNA-seq**: Acceptable duplication up to 40% (transcript abundance)
+- **DNA-seq**: Strict quality requirements (variant calling)
+- **ChIP-seq**: Moderate quality, focus on enrichment metrics
+
+## CLI Usage
+
+```bash
+# Analyze single report
+python scripts/fastqc_interpreter.py --input sample_fastqc.html
+
+# Batch analysis
+python scripts/fastqc_interpreter.py --batch "*fastqc.html" --output report.pdf
+
+# With custom thresholds
+python scripts/fastqc_interpreter.py --input fastqc.html --application rna_seq
+```
+
+## Output Interpretation
+
+**PASS (Green)**: Proceed with analysis
+**WARNING (Yellow)**: Review but likely acceptable
+**FAIL (Red)**: Requires action before downstream analysis
+
+## Troubleshooting Guide
+
+See `references/troubleshooting.md` for:
+- Platform-specific issues (Illumina, PacBio, Oxford Nanopore)
+- Library prep problem diagnosis
+- Downstream analysis impact assessment
+
+---
+
+**Skill ID**: 205 | **Version**: 1.0 | **License**: MIT

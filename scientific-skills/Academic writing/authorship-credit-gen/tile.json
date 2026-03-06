@@ -1,0 +1,11 @@
+{
+  "name": "aipoch/authorship-credit-gen",
+  "version": "0.1.0",
+  "private": true,
+  "summary": "Use when working with authorship credit gen",
+  "skills": {
+    "authorship-credit-gen": {
+      "path": "SKILL.md"
+    }
+  }
+}

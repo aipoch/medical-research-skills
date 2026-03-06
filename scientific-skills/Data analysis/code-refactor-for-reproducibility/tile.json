@@ -1,0 +1,11 @@
+{
+  "name": "aipoch/code-refactor-for-reproducibility",
+  "version": "0.1.0",
+  "private": true,
+  "summary": "Use when working with code refactor for reproducibility",
+  "skills": {
+    "code-refactor-for-reproducibility": {
+      "path": "SKILL.md"
+    }
+  }
+}

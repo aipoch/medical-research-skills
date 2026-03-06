@@ -1,87 +1,82 @@
 ---
 name: radiology-image-quiz
-description: Generate image-based diagnostic quizzes from text descriptions
-version: 1.0.0
-category: Education
-tags: []
-author: AIPOCH
+description: Use when creating radiology educational quizzes, preparing board exam questions, or studying medical imaging cases. Generates interactive quizzes with X-ray, CT, MRI, and ultrasound images for medical education.
+allowed-tools: "Read Write Bash Edit"
 license: MIT
-status: Draft
-risk_level: Medium
-skill_type: Tool/Script
-owner: AIPOCH
-reviewer: ''
-last_updated: '2026-02-06'
+metadata:
+  skill-author: AIPOCH
+  version: "1.0"
 ---
 
-# Radiology Image Quiz
+# Radiology Image Quiz Generator
 
-Diagnostic imaging practice questions.
+Create educational quizzes using radiology images (X-ray, CT, MRI, ultrasound) for medical students, residents, and board exam preparation.
 
-## Use Cases
-- Radiology residency prep
-- Case-based learning
-- Board exam simulation
-- Clinical reasoning training
+## Quick Start
 
-## Parameters
-- `modality`: X-ray/CT/MRI/US
-- `anatomy`: Body region
-- `pathology`: Disease category
-- `difficulty`: Beginner/advanced
+```python
+from scripts.radiology_quiz import RadiologyQuiz
 
-## Returns
-- Image prompt for generation
-- Multiple choice options
-- Correct answer with explanation
-- Teaching points
+quiz = RadiologyQuiz()
 
-## Example
-Chest X-ray showing lobar pneumonia
+# Generate quiz
+questions = quiz.generate(
+    modality="chest_xray",
+    difficulty="intermediate",
+    topic="pulmonary_pathology",
+    num_questions=10
+)
+```
 
-## Risk Assessment
+## Core Capabilities
 
-| Risk Indicator | Assessment | Level |
-|----------------|------------|-------|
-| Code Execution | Python/R scripts executed locally | Medium |
-| Network Access | No external API calls | Low |
-| File System Access | Read input files, write output files | Medium |
-| Instruction Tampering | Standard prompt guidelines | Low |
-| Data Exposure | Output files saved to workspace | Low |
+### 1. Quiz Generation
 
-## Security Checklist
+```python
+quiz = quiz.create(
+    images=["case1.png", "case2.png"],
+    question_type="multiple_choice",
+    include_findings=True,
+    include_differential=True
+)
+```
 
-- [ ] No hardcoded credentials or API keys
-- [ ] No unauthorized file system access (../)
-- [ ] Output does not expose sensitive information
-- [ ] Prompt injection protections in place
-- [ ] Input file paths validated (no ../ traversal)
-- [ ] Output directory restricted to workspace
-- [ ] Script execution in sandboxed environment
-- [ ] Error messages sanitized (no stack traces exposed)
-- [ ] Dependencies audited
-## Prerequisites
+**Question Types:**
+- Multiple choice (single best answer)
+- Select all that apply
+- Fill in the blank
+- Open-ended interpretation
 
-No additional Python packages required.
+### 2. Case Creation
 
-## Evaluation Criteria
+```python
+case = quiz.create_case(
+    image_path="ct_scan.png",
+    diagnosis="Pulmonary embolism",
+    findings=["Filling defect in pulmonary artery", "Right heart strain"],
+    clinical_history="Sudden onset dyspnea"
+)
+```
 
-### Success Metrics
-- [ ] Successfully executes main functionality
-- [ ] Output meets quality standards
-- [ ] Handles edge cases gracefully
-- [ ] Performance is acceptable
+### 3. Difficulty Calibration
 
-### Test Cases
-1. **Basic Functionality**: Standard input → Expected output
-2. **Edge Case**: Invalid input → Graceful error handling
-3. **Performance**: Large dataset → Acceptable processing time
+```python
+quiz = quiz.set_difficulty(
+    level="resident",  # medical_student, resident, fellow, attending
+    include_rare_findings=False
+)
+```
 
-## Lifecycle Status
+## CLI Usage
 
-- **Current Stage**: Draft
-- **Next Review Date**: 2026-03-06
-- **Known Issues**: None
-- **Planned Improvements**: 
-  - Performance optimization
-  - Additional feature support
+```bash
+python scripts/radiology_quiz.py \
+  --modality ct \
+  --topic emergency \
+  --num 20 \
+  --output quiz.pdf
+```
+
+---
+
+**Skill ID**: 212 | **Version**: 1.0 | **License**: MIT

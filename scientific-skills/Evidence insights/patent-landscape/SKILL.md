@@ -1,86 +1,129 @@
 ---
 name: patent-landscape
-description: Summarize patent landscape for specific therapeutic targets
-version: 1.0.0
-category: Pharma
-tags: []
-author: AIPOCH
+description: Use when analyzing biotech patent landscapes, identifying white spaces in pharmaceutical IP, tracking competitor patents, or assessing freedom to operate for drug development. Provides comprehensive patent analysis and strategic insights for life sciences innovation.
+allowed-tools: "Read Write Bash Edit"
 license: MIT
-status: Draft
-risk_level: Medium
-skill_type: Tool/Script
-owner: AIPOCH
-reviewer: ''
-last_updated: '2026-02-06'
+metadata:
+  skill-author: AIPOCH
+  version: "1.0"
 ---
 
-# Patent Landscape
+# Biotech Patent Landscape Analyzer
 
-Patent intelligence for target assessment.
+Analyze biotech and pharmaceutical patent landscapes to identify opportunities, assess competition, and guide R&D strategy.
 
-## Use Cases
-- FTO analysis preparation
-- White space identification
-- Competitive monitoring
-- Licensing strategy
+## Quick Start
 
-## Parameters
-- `target`: Gene/protein/disease
-- `jurisdiction`: US/EU/CN/WO
-- `date_range`: Filing years
+```python
+from scripts.patent_landscape import PatentLandscapeAnalyzer
 
-## Returns
-- Patent family summary
-- Key assignees ranking
-- Claim analysis overview
-- Freedom to operate summary
+analyzer = PatentLandscapeAnalyzer()
 
-## Example
-CRISPR patent landscape showing Broad vs Berkeley claims
+# Analyze therapeutic area
+landscape = analyzer.analyze(
+    therapeutic_area="CAR-T cell therapy",
+    date_range="2020-2024",
+    assignees=["Novartis", "Kite Pharma", "Juno Therapeutics"]
+)
+```
 
-## Risk Assessment
+## Core Capabilities
 
-| Risk Indicator | Assessment | Level |
-|----------------|------------|-------|
-| Code Execution | Python/R scripts executed locally | Medium |
-| Network Access | No external API calls | Low |
-| File System Access | Read input files, write output files | Medium |
-| Instruction Tampering | Standard prompt guidelines | Low |
-| Data Exposure | Output files saved to workspace | Low |
+### 1. Patent Search & Analysis
 
-## Security Checklist
+```python
+results = analyzer.search_patents(
+    keywords=["CRISPR", "gene editing", "therapeutic"],
+    classification="C12N15/113",  # IPC class
+    jurisdictions=["US", "EP", "WO"]
+)
+```
 
-- [ ] No hardcoded credentials or API keys
-- [ ] No unauthorized file system access (../)
-- [ ] Output does not expose sensitive information
-- [ ] Prompt injection protections in place
-- [ ] Input file paths validated (no ../ traversal)
-- [ ] Output directory restricted to workspace
-- [ ] Script execution in sandboxed environment
-- [ ] Error messages sanitized (no stack traces exposed)
-- [ ] Dependencies audited
-## Prerequisites
+**Search Strategies:**
+- **Keyword-based**: Technical terms + synonyms
+- **Classification-based**: IPC/CPC codes
+- **Citation-based**: Forward/backward citations
+- **Assignee-based**: Company portfolios
 
-No additional Python packages required.
+### 2. White Space Analysis
 
-## Evaluation Criteria
+```python
+opportunities = analyzer.identify_white_spaces(
+    technology="Antibody-drug conjugates",
+    target_diseases=["breast cancer", "lung cancer"],
+    existing_claims=landscape
+)
+```
 
-### Success Metrics
-- [ ] Successfully executes main functionality
-- [ ] Output meets quality standards
-- [ ] Handles edge cases gracefully
-- [ ] Performance is acceptable
+**White Space Opportunities:**
+- Underserved disease indications
+- Novel combination therapies
+- Alternative delivery mechanisms
+- Geographical gaps (emerging markets)
 
-### Test Cases
-1. **Basic Functionality**: Standard input → Expected output
-2. **Edge Case**: Invalid input → Graceful error handling
-3. **Performance**: Large dataset → Acceptable processing time
+### 3. Competitor Intelligence
 
-## Lifecycle Status
+```python
+competitors = analyzer.analyze_competitors(
+    companies=["Pfizer", "Moderna", "BioNTech"],
+    focus_area="mRNA vaccines"
+)
+```
 
-- **Current Stage**: Draft
-- **Next Review Date**: 2026-03-06
-- **Known Issues**: None
-- **Planned Improvements**: 
-  - Performance optimization
-  - Additional feature support
+**Competitor Metrics:**
+| Metric | Description |
+|--------|-------------|
+| Portfolio size | Total active patents |
+| Filing velocity | Recent filing trends |
+| Geographic coverage | Jurisdiction strategy |
+| Technology focus | Core vs. peripheral areas |
+| Partnership patterns | Collaboration trends |
+
+### 4. Freedom to Operate (FTO) Assessment
+
+```python
+fto = analyzer.assess_fto(
+    product_concept="Bispecific antibody targeting PD-1 and CTLA-4",
+    jurisdictions=["US", "EU", "Japan"]
+)
+```
+
+**FTO Analysis Steps:**
+1. Identify relevant patent claims
+2. Map claims to product features
+3. Assess validity of blocking patents
+4. Design around options
+5. Licensing recommendations
+
+## CLI Usage
+
+```bash
+# Generate patent landscape report
+python scripts/patent_landscape.py \
+  --query "immuno-oncology checkpoint inhibitors" \
+  --output landscape_report.pdf \
+  --format comprehensive
+
+# Quick FTO check
+python scripts/patent_landscape.py \
+  --fto "product_description.txt" \
+  --jurisdictions US EP JP
+```
+
+## Data Sources
+
+- USPTO (United States)
+- EPO (Europe)
+- WIPO (Global)
+- JPO (Japan)
+- CNIPA (China)
+
+## References
+
+- `references/ipc-classifications.md` - IPC/CPC codes for biotech
+- `references/patent-search-strategies.md` - Advanced search techniques
+- `examples/landscape-reports/` - Sample reports
+
+---
+
+**Skill ID**: 204 | **Version**: 1.0 | **License**: MIT

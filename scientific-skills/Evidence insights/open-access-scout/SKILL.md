@@ -1,89 +1,77 @@
 ---
 name: open-access-scout
-description: Find legal open access versions of paywalled papers
-version: 1.0.0
-category: Research
-tags: []
-author: AIPOCH
+description: Use when finding open access journals, checking journal policies, or identifying predatory publishers. Helps researchers locate legitimate open access venues and avoid publication scams.
+allowed-tools: "Read Write Bash Edit"
 license: MIT
-status: Draft
-risk_level: Medium
-skill_type: Tool/Script
-owner: AIPOCH
-reviewer: ''
-last_updated: '2026-02-06'
+metadata:
+  skill-author: AIPOCH
+  version: "1.0"
 ---
 
-# Open Access Scout
+# Open Access Journal Scout
 
-Legal full-text discovery tool.
+Find legitimate open access journals, verify publisher credibility, and avoid predatory publication traps.
 
-## Use Cases
-- Literature access without subscription
-- Database-limited environments
-- Patient education materials
-- Developing country researchers
+## Quick Start
 
-## Parameters
+```python
+from scripts.oa_scout import OpenAccessScout
 
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `doi` | str | No | - | Paper DOI identifier |
-| `title` | str | No | - | Article title for search |
-| `authors` | list[str] | No | - | Author list for verification |
+scout = OpenAccessScout()
 
-## Returns
-- Unpaywall links
-- Preprint servers (arXiv/bioRxiv)
-- Institutional repository
-- Author PDF request
+# Find journals
+journals = scout.find_journals(
+    subject="oncology",
+    impact_range=(2, 5),
+    max_apc=2000
+)
+```
 
-## Example
-Nature paper → Green OA version found
+## Core Capabilities
 
-## Risk Assessment
+### 1. Journal Search
 
-| Risk Indicator | Assessment | Level |
-|----------------|------------|-------|
-| Code Execution | Python/R scripts executed locally | Medium |
-| Network Access | No external API calls | Low |
-| File System Access | Read input files, write output files | Medium |
-| Instruction Tampering | Standard prompt guidelines | Low |
-| Data Exposure | Output files saved to workspace | Low |
+```python
+results = scout.search(
+    keywords=["immunotherapy", "cancer"],
+    filters={
+        "indexed_in": ["PubMed", "Scopus"],
+        "peer_review": "double_blind",
+        "apc_max": 2500
+    }
+)
+```
 
-## Security Checklist
+### 2. Predatory Check
 
-- [ ] No hardcoded credentials or API keys
-- [ ] No unauthorized file system access (../)
-- [ ] Output does not expose sensitive information
-- [ ] Prompt injection protections in place
-- [ ] Input file paths validated (no ../ traversal)
-- [ ] Output directory restricted to workspace
-- [ ] Script execution in sandboxed environment
-- [ ] Error messages sanitized (no stack traces exposed)
-- [ ] Dependencies audited
-## Prerequisites
+```python
+assessment = scout.assess_journal("Journal of Medical Advances")
+print(f"Trust score: {assessment.score}/100")
+print(f"Red flags: {assessment.red_flags}")
+```
 
-No additional Python packages required.
+**Warning Signs:**
+- No clear editorial board
+- Rapid review promises (<2 weeks)
+- Excessive APCs (>$3000)
+- Not indexed in major databases
+- Spam email invitations
 
-## Evaluation Criteria
+### 3. APC Comparison
 
-### Success Metrics
-- [ ] Successfully executes main functionality
-- [ ] Output meets quality standards
-- [ ] Handles edge cases gracefully
-- [ ] Performance is acceptable
+```python
+comparison = scout.compare_apc(
+    journals=["Journal A", "Journal B"],
+    currency="USD"
+)
+```
 
-### Test Cases
-1. **Basic Functionality**: Standard input → Expected output
-2. **Edge Case**: Invalid input → Graceful error handling
-3. **Performance**: Large dataset → Acceptable processing time
+## CLI Usage
 
-## Lifecycle Status
+```bash
+python scripts/oa_scout.py --search "oncology immunotherapy" --max-apc 2000
+```
 
-- **Current Stage**: Draft
-- **Next Review Date**: 2026-03-06
-- **Known Issues**: None
-- **Planned Improvements**: 
-  - Performance optimization
-  - Additional feature support
+---
+
+**Skill ID**: 210 | **Version**: 1.0 | **License**: MIT

@@ -1,0 +1,11 @@
+{
+  "name": "aipoch/citation-chasing-mapping",
+  "version": "0.1.0",
+  "private": true,
+  "summary": "Use when working with citation chasing mapping",
+  "skills": {
+    "citation-chasing-mapping": {
+      "path": "SKILL.md"
+    }
+  }
+}

@@ -1,91 +1,131 @@
 ---
 name: meta-analysis-forest-plotter
-description: Generate forest plots for meta-analysis with R/Python code
-version: 1.0.0
-category: Data
-tags: []
-author: AIPOCH
+description: Use when creating forest plots for meta-analyses, visualizing effect sizes across studies, or generating publication-ready meta-analysis figures. Produces high-quality forest plots with confidence intervals, heterogeneity metrics, and subgroup analyses.
+allowed-tools: "Read Write Bash Edit"
 license: MIT
-status: Draft
-risk_level: Medium
-skill_type: Tool/Script
-owner: AIPOCH
-reviewer: ''
-last_updated: '2026-02-06'
+metadata:
+  skill-author: AIPOCH
+  version: "1.0"
 ---
 
-# Meta-Analysis Forest Plotter
+# Meta-Analysis Forest Plot Generator
 
-Create publication-quality forest plots for meta-analyses.
+Create publication-ready forest plots for systematic reviews and meta-analyses with customizable styling and statistical annotations.
 
-## Use Cases
-- Systematic review visualization
-- Meta-analysis publication
-- Evidence synthesis reporting
+## Quick Start
 
-## Parameters
+```python
+from scripts.forest_plotter import ForestPlotter
 
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `studies` | str | Yes | - | Path to study data file with OR/RR and CI |
-| `effect_measure` | str | No | "OR" | Effect measure: "OR", "RR", or "MD" |
-| `subgroup` | str | No | - | Subgroup analysis variable (optional) |
+plotter = ForestPlotter()
 
-## Returns
-- Forest plot code (R meta package)
-- Funnel plot for publication bias
-- Heterogeneity statistics (I²)
-
-## Example
-Input: 15 studies with OR and 95% CI
-Output: Publication-ready forest plot with pooled estimate
-
-## Risk Assessment
-
-| Risk Indicator | Assessment | Level |
-|----------------|------------|-------|
-| Code Execution | Python/R scripts executed locally | Medium |
-| Network Access | No external API calls | Low |
-| File System Access | Read input files, write output files | Medium |
-| Instruction Tampering | Standard prompt guidelines | Low |
-| Data Exposure | Output files saved to workspace | Low |
-
-## Security Checklist
-
-- [ ] No hardcoded credentials or API keys
-- [ ] No unauthorized file system access (../)
-- [ ] Output does not expose sensitive information
-- [ ] Prompt injection protections in place
-- [ ] Input file paths validated (no ../ traversal)
-- [ ] Output directory restricted to workspace
-- [ ] Script execution in sandboxed environment
-- [ ] Error messages sanitized (no stack traces exposed)
-- [ ] Dependencies audited
-## Prerequisites
-
-```bash
-# Python dependencies
-pip install -r requirements.txt
+# Generate forest plot
+plot = plotter.create_plot(
+    studies=["Study A", "Study B", "Study C"],
+    effect_sizes=[1.2, 0.8, 1.5],
+    ci_lower=[0.9, 0.5, 1.1],
+    ci_upper=[1.5, 1.1, 1.9],
+    overall_effect=1.15
+)
 ```
 
-## Evaluation Criteria
+## Core Capabilities
 
-### Success Metrics
-- [ ] Successfully executes main functionality
-- [ ] Output meets quality standards
-- [ ] Handles edge cases gracefully
-- [ ] Performance is acceptable
+### 1. Basic Forest Plot
 
-### Test Cases
-1. **Basic Functionality**: Standard input → Expected output
-2. **Edge Case**: Invalid input → Graceful error handling
-3. **Performance**: Large dataset → Acceptable processing time
+```python
+fig = plotter.plot(
+    data=studies_df,
+    effect_col="HR",
+    ci_lower_col="CI_lower",
+    ci_upper_col="CI_upper",
+    study_col="study_name"
+)
+```
 
-## Lifecycle Status
+**Required Data Columns:**
+- Study name/identifier
+- Effect size (OR, HR, RR, MD, etc.)
+- Confidence interval lower bound
+- Confidence interval upper bound
+- Weight (optional, for precision)
 
-- **Current Stage**: Draft
-- **Next Review Date**: 2026-03-06
-- **Known Issues**: None
-- **Planned Improvements**: 
-  - Performance optimization
-  - Additional feature support
+### 2. Statistical Annotations
+
+```python
+fig = plotter.plot_with_stats(
+    data,
+    heterogeneity_stats={
+        "I2": 45.2,
+        "p_value": 0.03,
+        "Q_statistic": 18.4
+    },
+    overall_effect={
+        "estimate": 1.15,
+        "ci": [0.98, 1.35],
+        "p_value": 0.08
+    }
+)
+```
+
+**Heterogeneity Metrics:**
+| Metric | Interpretation |
+|--------|---------------|
+| I² < 25% | Low heterogeneity |
+| I² 25-50% | Moderate heterogeneity |
+| I² > 50% | High heterogeneity |
+| Q p-value < 0.05 | Significant heterogeneity |
+
+### 3. Subgroup Analysis
+
+```python
+fig = plotter.subgroup_plot(
+    data,
+    subgroup_col="treatment_type",
+    subgroups=["Surgery", "Radiation", "Combined"]
+)
+```
+
+### 4. Custom Styling
+
+```python
+fig = plotter.plot(
+    data,
+    style="publication",
+    journal="lancet",  # or "nejm", "jama", "nature"
+    color_scheme="monochrome",
+    show_weights=True
+)
+```
+
+## CLI Usage
+
+```bash
+# From CSV data
+python scripts/forest_plotter.py \
+  --input meta_analysis_data.csv \
+  --effect-col OR \
+  --output forest_plot.pdf
+
+# With custom styling
+python scripts/forest_plotter.py \
+  --input data.csv \
+  --style lancet \
+  --width 8 --height 10
+```
+
+## Output Formats
+
+- **PDF**: Publication quality, vector graphics
+- **PNG**: Web/presentation, 300 DPI
+- **SVG**: Editable in Illustrator/Inkscape
+- **TIFF**: Journal submission format
+
+## References
+
+- `references/forest-plot-styles.md` - Journal-specific formatting
+- `examples/sample-plots/` - Example outputs
+
+---
+
+**Skill ID**: 207 | **Version**: 1.0 | **License**: MIT

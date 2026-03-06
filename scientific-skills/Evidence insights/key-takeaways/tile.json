@@ -1,0 +1,11 @@
+{
+  "name": "aipoch/key-takeaways",
+  "version": "0.1.0",
+  "private": true,
+  "summary": "Use when working with key takeaways",
+  "skills": {
+    "key-takeaways": {
+      "path": "SKILL.md"
+    }
+  }
+}

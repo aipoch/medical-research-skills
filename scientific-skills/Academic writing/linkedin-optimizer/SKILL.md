@@ -1,95 +1,170 @@
 ---
 name: linkedin-optimizer
-description: Optimizes LinkedIn profiles for medical professionals.
-version: 1.0.0
-category: Career
-tags:
-- linkedin
-- profile
-- career
-- networking
-author: AIPOCH
+description: Use when optimizing LinkedIn profiles for doctors, physicians, nurses, healthcare professionals, or medical researchers. Crafts compelling headlines, writes professional summaries, integrates healthcare keywords, and builds personal branding for medical careers.
+allowed-tools: "Read Write Bash Edit"
 license: MIT
-status: Draft
-risk_level: Medium
-skill_type: Tool/Script
-owner: AIPOCH
-reviewer: ''
-last_updated: '2026-02-06'
+metadata:
+  skill-author: AIPOCH
+  version: "1.0"
 ---
 
-# LinkedIn Optimizer
+# LinkedIn Optimizer for Healthcare Professionals
 
-Optimizes LinkedIn profiles for healthcare professionals.
+Optimize LinkedIn profiles for doctors, physicians, nurses, and healthcare professionals to enhance professional visibility and career opportunities.
 
-## Features
+## Quick Start
 
-- Headline optimization
-- About section writing
-- Keyword integration
-- Professional branding
+```python
+from scripts.linkedin_optimizer import LinkedInOptimizer
 
-## Input Parameters
+optimizer = LinkedInOptimizer()
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `role` | str | Yes | Current role |
-| `specialty` | str | Yes | Medical specialty |
-| `achievements` | list | Yes | Key achievements |
+# Generate optimized profile content
+profile = optimizer.optimize(
+    role="Cardiologist",
+    specialty="Interventional Cardiology",
+    achievements=["Published 15+ peer-reviewed papers", "Led clinical trial for novel stent"],
+    years_experience=12
+)
 
-## Output Format
-
-```json
-{
-  "headline": "string",
-  "about_section": "string",
-  "keywords": ["string"]
-}
+print(profile.headline)
+print(profile.about_section)
 ```
 
-## Risk Assessment
+## Core Capabilities
 
-| Risk Indicator | Assessment | Level |
-|----------------|------------|-------|
-| Code Execution | Python/R scripts executed locally | Medium |
-| Network Access | No external API calls | Low |
-| File System Access | Read input files, write output files | Medium |
-| Instruction Tampering | Standard prompt guidelines | Low |
-| Data Exposure | Output files saved to workspace | Low |
+### 1. Headline Optimization
 
-## Security Checklist
+```python
+optimizer = LinkedInOptimizer()
+headline = optimizer.generate_headline(
+    title="Board-Certified Cardiologist",
+    specialty="Heart Failure & Transplant",
+    differentiator="Clinical Researcher"
+)
+# Output: "Board-Certified Cardiologist | Heart Failure & Transplant Specialist | Clinical Researcher"
+```
 
-- [ ] No hardcoded credentials or API keys
-- [ ] No unauthorized file system access (../)
-- [ ] Output does not expose sensitive information
-- [ ] Prompt injection protections in place
-- [ ] Input file paths validated (no ../ traversal)
-- [ ] Output directory restricted to workspace
-- [ ] Script execution in sandboxed environment
-- [ ] Error messages sanitized (no stack traces exposed)
-- [ ] Dependencies audited
-## Prerequisites
+**Headline Formulas:**
+- `Title | Specialty | Differentiator`
+- `Role | Key Skill | Mission`
+- `Credentials | Focus Area | Value Proposition`
 
-No additional Python packages required.
+### 2. About Section Writing
 
-## Evaluation Criteria
+```python
+about = optimizer.write_about_section(
+    role="Oncologist",
+    approach="Patient-centered care with precision medicine",
+    expertise=["Immunotherapy", "Clinical trials", "Palliative care"],
+    achievements=["Treated 1000+ patients", "Principal investigator on 5 trials"]
+)
+```
 
-### Success Metrics
-- [ ] Successfully executes main functionality
-- [ ] Output meets quality standards
-- [ ] Handles edge cases gracefully
-- [ ] Performance is acceptable
+**About Section Structure:**
+1. **Opening Hook** (2-3 sentences) - Who you help and how
+2. **Expertise Areas** (bullet points) - Key skills and specialties
+3. **Key Achievements** (bullet points) - Quantified accomplishments
+4. **Call to Action** - How to connect
 
-### Test Cases
-1. **Basic Functionality**: Standard input → Expected output
-2. **Edge Case**: Invalid input → Graceful error handling
-3. **Performance**: Large dataset → Acceptable processing time
+**Example:**
+> I'm a board-certified oncologist dedicated to advancing cancer treatment through precision medicine and immunotherapy. With over 10 years of experience, I specialize in developing personalized treatment plans that improve patient outcomes while maintaining quality of life.
+>
+> **Areas of Expertise:**
+> - Immunotherapy and targeted therapy
+> - Clinical trial design and implementation
+> - Palliative care integration
+> - Multi-disciplinary team leadership
+>
+> **Key Achievements:**
+> - Treated 1000+ cancer patients with 85% positive outcomes
+> - Principal investigator on 5 Phase II/III clinical trials
+> - Published 20+ peer-reviewed papers on novel treatment protocols
+>
+> **Let's Connect:** Open to collaborations on clinical research and discussing innovative treatment approaches.
 
-## Lifecycle Status
+### 3. Keyword Integration
 
-- **Current Stage**: Draft
-- **Next Review Date**: 2026-03-06
-- **Known Issues**: None
-- **Planned Improvements**: 
-  - Performance optimization
-  - Additional feature support
+```python
+keywords = optimizer.suggest_keywords(
+    specialty="Emergency Medicine",
+    role="ER Physician",
+    target_audience=["Recruiters", "Hospital administrators", "Medical device companies"]
+)
+```
+
+**High-Value Keywords by Specialty:**
+
+| Specialty | Primary Keywords | Secondary Keywords |
+|-----------|-----------------|-------------------|
+| Cardiology | Cardiologist, Interventional Cardiology, Heart Failure | Clinical Cardiology, Cardiac Catheterization |
+| Oncology | Oncologist, Medical Oncology, Cancer Treatment | Immunotherapy, Precision Medicine |
+| Surgery | Surgeon, General Surgery, Minimally Invasive | Robotic Surgery, Laparoscopic |
+| Pediatrics | Pediatrician, Child Health, Developmental Medicine | Neonatology, Pediatric Emergency |
+| Research | Clinical Research, Principal Investigator, FDA Trials | Drug Development, Protocol Design |
+
+### 4. Experience Section Optimization
+
+```python
+experiences = optimizer.optimize_experiences([
+    {
+        "title": "Attending Physician",
+        "organization": "Mayo Clinic",
+        "duration": "2019-Present",
+        "achievements": ["Reduced readmission rates by 25%", "Implemented new protocol"]
+    }
+])
+```
+
+**Experience Formula:**
+- **Action verb** + **What you did** + **Result/Impact**
+- Example: "Implemented early discharge protocol reducing average length of stay by 2.3 days and saving $500K annually"
+
+## CLI Usage
+
+```bash
+# Optimize complete profile
+python scripts/linkedin_optimizer.py \
+  --role "Neurologist" \
+  --specialty "Movement Disorders" \
+  --achievements "Published 10 papers, Led Parkinson's clinic" \
+  --output profile.json
+
+# Generate only headline
+python scripts/linkedin_optimizer.py \
+  --mode headline \
+  --title "Emergency Medicine Physician" \
+  --specialty "Trauma & Critical Care"
+```
+
+## Common Patterns
+
+See `references/linkedin-examples.md` for detailed examples:
+- Academic Physician Profile
+- Private Practice Doctor
+- Medical Researcher
+- Healthcare Executive
+- Resident/Fellow Profile
+
+## Quality Checklist
+
+**Before Optimization:**
+- [ ] Define target audience (recruiters, patients, collaborators)
+- [ ] List 3-5 key achievements with metrics
+- [ ] Identify unique value proposition
+
+**After Optimization:**
+- [ ] Headline under 220 characters
+- [ ] About section includes keywords naturally
+- [ ] All claims are verifiable
+- [ ] Call to action is clear
+
+## References
+
+- `references/linkedin-examples.md` - Profile examples by specialty
+- `references/keywords-by-specialty.json` - Keyword database
+- `references/headline-templates.md` - Headline formulas
+
+---
+
+**Skill ID**: 201 | **Version**: 1.0 | **License**: MIT

@@ -1,0 +1,11 @@
+{
+  "name": "aipoch/graph-interpretation",
+  "version": "0.1.0",
+  "private": true,
+  "summary": "Use when interpreting scientific graphs and charts, explaining data visualizations, or describing figures for academic papers.",
+  "skills": {
+    "graph-interpretation": {
+      "path": "SKILL.md"
+    }
+  }
+}
