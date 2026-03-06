@@ -1,10 +1,11 @@
 ---
 name: clinical-data-cleaner
 description: Clean and standardize raw clinical trial data for CDISC SDTM compliance. Handles missing values, detects statistical and clinical outliers, validates domain structure, and generates audit trails for regulatory submissions.
-allowed-tools: [Read, Write, Bash, Edit]
+allowed-tools: "Read Write Bash Edit"
 license: MIT
 metadata:
   skill-author: AIPOCH
+  version: "2.0"
 ---
 
 # Clinical Data Cleaner
