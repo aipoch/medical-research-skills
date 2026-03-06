@@ -2,7 +2,7 @@
   "name": "aipoch/clinical-data-cleaner",
   "version": "0.1.0",
   "private": true,
-  "summary": "Clean and standardize raw clinical trial data for CDISC SDTM compliance. Handles missing values, detects statistical and clinical outliers, validates domain structure, and generates audit trails for regulatory submissions.",
+  "summary": "Use when cleaning clinical trial data, preparing data for FDA/EMA submission, standardizing SDTM datasets, handling missing values in clinical studies, detecting outliers in lab results, or converting raw CRF data to CDISC format.",
   "skills": {
     "clinical-data-cleaner": {
       "path": "SKILL.md"
@@ -10,6 +10,10 @@
   },
   "entrypoints": {
     "skill": "SKILL.md",
-    "references": "references/sdtm_ig_guide.md"
+    "references": [
+      "references/sdtm_ig_guide.md",
+      "references/common-patterns.md",
+      "references/troubleshooting.md"
+    ]
   }
 }
