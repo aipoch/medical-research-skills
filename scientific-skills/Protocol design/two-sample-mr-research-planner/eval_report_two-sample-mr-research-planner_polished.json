@@ -1,0 +1,185 @@
+{
+  "meta": {
+    "skill_name": "two-sample-mr-research-planner",
+    "evaluated_on": "2026-03-13",
+    "evaluator_version": "skill-auditor@1.0",
+    "category": "Protocol Design",
+    "execution_mode": "A",
+    "complexity": "Moderate",
+    "n_inputs": 5,
+    "audit_note": "Post-polish re-audit. Original score: 85.5/100. Polished by skill-evaluator@1.0."
+  },
+  "veto_gates": {
+    "skill_veto": {
+      "gate": "PASS",
+      "stability": "PASS",
+      "contract": "PASS",
+      "determinism": "PASS",
+      "security": "PASS"
+    },
+    "research_veto": {
+      "applicable": true,
+      "gate": "PASS",
+      "scientific_integrity": {
+        "result": "PASS",
+        "detail": "No fabricated DOIs, PMIDs, or p-values across any output. All thresholds (PP.H4 > 0.8, F > 10, p < 5e-8) are field-standard and correctly applied."
+      },
+      "practice_boundaries": {
+        "result": "PASS",
+        "detail": "No diagnostic conclusions in any output. Microbiome MR explicitly framed as exploratory across all relevant inputs. No unapproved treatments or clinical recommendations."
+      },
+      "methodological_ground": {
+        "result": "PASS",
+        "detail": "No causal inversion errors. IV validity criteria correctly maintained. Weak-instrument escalation path (WM over IVW when N_IVs < 10) methodologically sound. Ancestry matching and sample overlap addressed in all relevant outputs."
+      },
+      "code_usability": {
+        "result": "PASS",
+        "detail": "R code in Input 5 uses standard TwoSampleMR and MRPRESSO CRAN packages with correct syntax. Inline IV feasibility check (stop() if N_IVs < 3) prevents unrunnable analysis. All GWAS IDs labeled as EXAMPLE IDs with replacement instructions."
+      }
+    }
+  },
+  "static_score": {
+    "total": 96,
+    "categories": {
+      "functional_suitability": 12,
+      "reliability": 10,
+      "performance_context": 8,
+      "agent_usability": 16,
+      "human_usability": 8,
+      "security": 12,
+      "maintainability": 11,
+      "agent_specific": 19
+    }
+  },
+  "dynamic_score": {
+    "inputs": [
+      {
+        "input_id": 1,
+        "type": "Canonical",
+        "prompt": "I want to investigate the causal effect of serum uric acid levels on gout risk. Please design a two-sample MR study plan.",
+        "status": "COMPLETED",
+        "basic_score": 39,
+        "specialized_score": 58,
+        "total_score": 97,
+        "assertions_passed": 5,
+        "assertions_total": 5,
+        "assertions": [
+          { "text": "Output contains all four workload configurations (Lite/Standard/Advanced/Publication+)", "result": "PASS", "note": "All four configurations generated with timeframes, modules, strengths, and weaknesses" },
+          { "text": "IV count benchmarks from iv_benchmarks.md are consulted and used to justify the configuration recommendation", "result": "PASS", "note": "Biomarker well-powered class: 10-100 IVs, Very Low risk; used to confirm Standard is appropriate" },
+          { "text": "GWAS database references from gwas_databases.md are cited for both exposure and outcome", "result": "PASS", "note": "UKB for uric acid; FinnGen/UKB for gout; EUR-EUR ancestry matching confirmed" },
+          { "text": "Risk review addresses pleiotropy, ancestry mismatch, and sample overlap", "result": "PASS", "note": "All three reviewer criticisms covered with specific mechanisms and revision strategies" },
+          { "text": "Output distinguishes primary MR evidence, sensitivity support, and higher-tier causal strengthening", "result": "PASS", "note": "Three-tier hierarchy explicitly maintained per Step 6 instructions" }
+        ]
+      },
+      {
+        "input_id": 2,
+        "type": "Variant A",
+        "prompt": "I need to screen 12 dietary factors (coffee, red meat, fish oil, vegetables, etc.) for causal associations with colorectal cancer. Please generate an MR research plan.",
+        "status": "COMPLETED",
+        "basic_score": 38,
+        "specialized_score": 55,
+        "total_score": 93,
+        "assertions_passed": 5,
+        "assertions_total": 5,
+        "assertions": [
+          { "text": "Output contains all four workload configurations", "result": "PASS", "note": "Complete with dietary-specific module descriptions" },
+          { "text": "Per-dietary-factor IV count is explicitly quantified with a weak-instrument risk flag", "result": "PASS", "note": "Dietary class: 2-15 IVs, High risk; communicated clearly; per-factor F-statistic table recommended" },
+          { "text": "Both FDR (BH) and Bonferroni correction are specified for 12 multiple comparisons", "result": "PASS", "note": "Both methods specified; both corrected and uncorrected p-values to be reported" },
+          { "text": "Hard Rule 5 is respected (MVMR not forced unconditionally)", "result": "PASS", "note": "MVMR conditioned on multiple nominally significant dietary exposures" },
+          { "text": "Per-dietary-factor F-statistic reporting is recommended as a supplementary deliverable", "result": "PASS", "note": "Explicitly recommended to pre-empt reviewer challenges on instrument strength" }
+        ]
+      },
+      {
+        "input_id": 3,
+        "type": "Edge",
+        "prompt": "I want to study the relationship between sleep duration and depression, but I'm unsure about the direction — it might be bidirectional. Please design an MR plan. Note: I only have two weeks.",
+        "status": "COMPLETED",
+        "basic_score": 40,
+        "specialized_score": 60,
+        "total_score": 100,
+        "assertions_passed": 5,
+        "assertions_total": 5,
+        "assertions": [
+          { "text": "Output contains all four workload configurations", "result": "PASS", "note": "Complete" },
+          { "text": "Two-week constraint correctly handled (Lite recommended; bidirectional declined)", "result": "PASS", "note": "Hard Rule 5 applied; escape hatch activated with explicit timeline communication" },
+          { "text": "Escape hatch is activated with explicit communication that bidirectional MR requires 4-8 weeks minimum", "result": "PASS", "note": "Clear, actionable timeline guidance provided" },
+          { "text": "IV count benchmarks for sleep class are consulted (2-30 IVs, Moderate risk)", "result": "PASS", "note": "Sleep duration class correctly looked up; WM preferred over MR-Egger if N_IVs < 20" },
+          { "text": "Weighted Median is recommended as preferred primary estimator when N_IVs is less than 20", "result": "PASS", "note": "Methodologically correct recommendation for low-IV settings" }
+        ]
+      },
+      {
+        "input_id": 4,
+        "type": "Variant B",
+        "prompt": "Please design a plasma proteome → Alzheimer's disease two-sample MR study. My goal is publication in a high-impact journal.",
+        "status": "COMPLETED",
+        "basic_score": 39,
+        "specialized_score": 58,
+        "total_score": 97,
+        "assertions_passed": 5,
+        "assertions_total": 5,
+        "assertions": [
+          { "text": "All four configurations are generated and complete", "result": "PASS", "note": "Complete; Publication+ correctly recommended for high-impact target" },
+          { "text": "cis-pQTL priority is enforced with the ±1 Mb extraction window explicitly specified", "result": "PASS", "note": "Correct cis definition; trans-pQTL flagged as high pleiotropy risk" },
+          { "text": "Colocalization is required with PP.H4 > 0.8 threshold stated", "result": "PASS", "note": "Standard threshold correctly specified; HyPrColoc/coloc mentioned as tools" },
+          { "text": "IV count benchmarks for the protein cis-pQTL class are consulted (1-10 IVs, Moderate risk)", "result": "PASS", "note": "Correctly looked up; implications for instrument strategy clearly drawn" },
+          { "text": "Sample overlap between the pQTL GWAS source and the AD GWAS is explicitly addressed", "result": "PASS", "note": "UKB proteome vs UKB-derived AD GWAS overlap check recommended" }
+        ]
+      },
+      {
+        "input_id": 5,
+        "type": "Stress",
+        "prompt": "I want to use MR to study the causal effects of gut microbiome diversity on three outcomes — type 2 diabetes, cardiovascular disease, and depression — with bidirectional validation. Please give me a complete study plan and an R code framework.",
+        "status": "COMPLETED",
+        "basic_score": 36,
+        "specialized_score": 52,
+        "total_score": 88,
+        "assertions_passed": 5,
+        "assertions_total": 5,
+        "assertions": [
+          { "text": "All four workload configurations are present", "result": "PASS", "note": "Complete; Advanced-Publication+ correctly recommended" },
+          { "text": "Microbiome IV count benchmarks are consulted (1-5 IVs, Very High risk) and communicated to the user", "result": "PASS", "note": "MiBioGen typical range stated; feasibility assessment required before committing; exploratory framing mandatory" },
+          { "text": "All GWAS IDs in the R code framework are labeled 'EXAMPLE ID — replace before running'", "result": "PASS", "note": "Every GWAS ID in the code block carries the EXAMPLE ID comment; no unlabeled IDs remain" },
+          { "text": "An inline IV feasibility check (stop if N_IVs < 3) is included in the R code", "result": "PASS", "note": "stop() condition added immediately after extract_instruments(); prevents silently running infeasible MR" },
+          { "text": "Exploratory framing is enforced throughout the output; publication skepticism is explicitly acknowledged", "result": "PASS", "note": "Both in-text and escape hatch language frame results as hypothesis generation only" }
+        ]
+      }
+    ],
+    "execution_avg": 95.0,
+    "assertion_pass_rate": "25/25"
+  },
+  "final": {
+    "static_score": 96,
+    "static_weighted": 38.4,
+    "dynamic_score": 95.0,
+    "dynamic_weighted": 57.0,
+    "final_score": 95.4,
+    "grade": "Production Ready",
+    "deployable": true,
+    "veto_override": false
+  },
+  "key_strengths": [
+    "Perfect assertion pass rate (25/25) after polishing — the iv_benchmarks.md and gwas_databases.md reference files resolved all previously failing assertions by providing structured, class-specific guidance accessible at execution time.",
+    "Progressive disclosure now fully implemented: SKILL.md at 152 lines with two cleanly scoped reference files; GWAS tables and IV benchmarks can be updated independently without touching core workflow logic.",
+    "Fault tolerance for instrument scarcity is now explicit: three failure modes (GWAS unavailable, N_IVs < 3, F < 10) have defined response procedures, raising Reliability from 6/12 to 10/12.",
+    "R Code Framework Guidelines section with mandatory EXAMPLE ID comments and inline IV feasibility checks eliminates the code-misuse risk identified in the original audit.",
+    "Input Validation section and Hard Rule 11 together provide comprehensive boundary enforcement: vague inputs trigger default-inference, out-of-scope inputs trigger polite redirect, infeasible analyses trigger explicit warnings."
+  ],
+  "recommendations": [
+    {
+      "priority": "P2",
+      "title": "Add a formal output schema for the per-configuration summary block",
+      "observed_in": [1, 2, 4],
+      "problem": "The four-configuration table output format is described in prose but not as a formal template, leading to slight structural variation across complex inputs.",
+      "root_cause": "Step 2 describes what to include per configuration but does not provide a fixed markdown template for the output block.",
+      "fix": "Add a fixed output template to Step 2 or a new references/output_templates.md showing the exact markdown table format expected for each configuration block, ensuring structural consistency across all inputs."
+    },
+    {
+      "priority": "P2",
+      "title": "Add example test input / expected output pair to support testability",
+      "observed_in": [],
+      "problem": "The skill has no documented example test input with expected output, making automated regression testing difficult if the skill is updated in future.",
+      "root_cause": "Testability (Static Category 7.3) scored 3/4 due to absence of example test cases despite clear parameter thresholds.",
+      "fix": "Add a ## Usage Examples section at the end of SKILL.md with one canonical example (e.g., uric acid → gout) showing the expected structure of the four-configuration output. This also improves discoverability for new users."
+    }
+  ]
+}

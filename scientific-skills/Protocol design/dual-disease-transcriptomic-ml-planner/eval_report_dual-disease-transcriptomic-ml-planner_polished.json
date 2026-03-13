@@ -1,0 +1,221 @@
+{
+  "meta": {
+    "skill_name": "dual-disease-transcriptomic-ml-planner",
+    "evaluated_on": "2026-03-13",
+    "evaluator_version": "skill-auditor@1.0",
+    "category": "Protocol Design",
+    "execution_mode": "A",
+    "complexity": "Complex",
+    "n_inputs": 7,
+    "audit_note": "Post-polish re-audit. Original score: 81.8/100 (Limited Release). Polished by skill-evaluator@1.0."
+  },
+  "veto_gates": {
+    "skill_veto": {
+      "gate": "PASS",
+      "stability": "PASS",
+      "contract": "PASS",
+      "determinism": "PASS",
+      "security": "PASS"
+    },
+    "research_veto": {
+      "applicable": true,
+      "gate": "PASS",
+      "scientific_integrity": {
+        "result": "PASS",
+        "detail": "No fabricated GSE IDs, DEG counts, or AUC values across any output. All EXAMPLE GEO accessions are labeled as examples. All thresholds (logFC>1-2, adj.p<0.05, AUC>0.70, STRING confidence>0.4, CytoHubba>=5 algorithms) are field-standard and correctly applied."
+      },
+      "practice_boundaries": {
+        "result": "PASS",
+        "detail": "Hub gene candidates consistently labeled as biomarker candidates throughout all outputs (Hard Rule 7). No diagnostic conclusions. Immune-correlation results correctly framed as associative only (Hard Rule 8). No clinical recommendations. Scope boundary correctly enforced via Input Validation for single-disease request."
+      },
+      "methodological_ground": {
+        "result": "PASS",
+        "detail": "No causal inversion errors. Evidence hierarchy (shared-expression, hub-prioritization, biomarker performance, immune support, mechanistic support) explicitly maintained per Step 6. Zero-DEG recovery sequence methodologically sound (relax threshold -> top-500 -> WGCNA). Brain tissue deconvolution tool recommendation (EPIC over LM22) is methodologically correct. No ethical compliance gaps for public GEO data."
+      },
+      "code_usability": {
+        "result": "PASS",
+        "detail": "R code in Input 5 uses correct CRAN/Bioconductor packages (GEOquery, limma, clusterProfiler, pROC) with valid function signatures. Zero-intersection stop() guard prevents silent downstream errors. AUC warning() at 0.70 threshold included. All EXAMPLE IDs labeled per R Code Framework Guidelines. Code is fully runnable with real data substituted."
+      }
+    }
+  },
+  "static_score": {
+    "total": 96,
+    "categories": {
+      "functional_suitability": 12,
+      "reliability": 10,
+      "performance_context": 8,
+      "agent_usability": 16,
+      "human_usability": 8,
+      "security": 12,
+      "maintainability": 11,
+      "agent_specific": 19
+    }
+  },
+  "dynamic_score": {
+    "inputs": [
+      {
+        "input_id": 1,
+        "type": "Canonical",
+        "prompt": "I want to identify shared hub genes between intracranial aneurysm and abdominal aortic aneurysm using public GEO data. Please design a complete dual-disease transcriptomic ML plan.",
+        "status": "COMPLETED",
+        "basic_score": 39,
+        "specialized_score": 58,
+        "total_score": 97,
+        "assertions_passed": 5,
+        "assertions_total": 5,
+        "assertions": [
+          { "text": "All four workload configurations are present with timeframes and module descriptions", "result": "PASS", "note": "Lite/Standard/Advanced/Publication+ all generated with full details" },
+          { "text": "Standard configuration is recommended with evidence-based justification tied to disease biology and GEO data richness", "result": "PASS", "note": "ECM/MMP biology and multiple available GEO datasets cited as justification" },
+          { "text": "tissue_and_tool_decisions.md consulted; arterial wall tissue specified with CIBERSORT-X as immune deconvolution tool", "result": "PASS", "note": "Arterial wall tissue correct; CIBERSORT-X appropriate for solid vascular tissue" },
+          { "text": "geo_search_and_tools.md consulted; example GEO accessions cited for both diseases", "result": "PASS", "note": "GSE75436/GSE57691 for IA; GSE57492/GSE47472 for AAA; labeled as examples" },
+          { "text": "CytoHubba multi-algorithm consensus specifies at least 5 algorithms by name", "result": "PASS", "note": "Degree, MCC, Betweenness, Closeness, EPC — 5 algorithms listed" }
+        ]
+      },
+      {
+        "input_id": 2,
+        "type": "Variant A",
+        "prompt": "I need to find shared biomarkers between type 2 diabetes and NAFLD. Goal: mid-tier journal within 3 months.",
+        "status": "COMPLETED",
+        "basic_score": 38,
+        "specialized_score": 55,
+        "total_score": 93,
+        "assertions_passed": 5,
+        "assertions_total": 5,
+        "assertions": [
+          { "text": "All four configurations are complete", "result": "PASS", "note": "Complete" },
+          { "text": "3-month time constraint is correctly mapped to Standard configuration", "result": "PASS", "note": "Advanced flagged as tight; Standard recommended" },
+          { "text": "T2D tissue decision is resolved with a concrete rule from tissue_and_tool_decisions.md T2D sub-rules", "result": "PASS", "note": "Liver selected for hepatic co-study with NAFLD; assumption explicitly stated; adipose alternative noted" },
+          { "text": "Hard Rule 6 applied with bootstrap CI requirement for small-cohort AUC", "result": "PASS", "note": "n<40 liver biopsy caveat; bootstrap CI required; not optional" },
+          { "text": "Platform compatibility check between different Affymetrix array generations is mentioned", "result": "PASS", "note": "GPL570 vs GPL96 cross-compatibility noted" }
+        ]
+      },
+      {
+        "input_id": 3,
+        "type": "Edge",
+        "prompt": "SLE and RA shared mechanisms. Only one GEO dataset per disease. Can I still do this?",
+        "status": "COMPLETED",
+        "basic_score": 40,
+        "specialized_score": 60,
+        "total_score": 100,
+        "assertions_passed": 5,
+        "assertions_total": 5,
+        "assertions": [
+          { "text": "All four configurations are generated; Lite is correctly recommended", "result": "PASS", "note": "Single-dataset constraint drives Lite; Standard requires second dataset per disease" },
+          { "text": "Single-dataset constraint triggers Lite recommendation; Standard requirement for second dataset stated", "result": "PASS", "note": "Tier boundary clearly articulated with reasoning" },
+          { "text": "Validation-cohort ROC is explicitly declared infeasible with a clear limitation statement", "result": "PASS", "note": "Discovery-only ROC stated; not hidden or minimized" },
+          { "text": "Escape hatch activated with GEO search strategy for sourcing a second dataset", "result": "PASS", "note": "Actionable GEO search guidance from geo_search_and_tools.md provided" },
+          { "text": "Tissue matching guidance applied for SLE-RA pair with compatible fallback tissue specified", "result": "PASS", "note": "Synovial vs PBMC mismatch noted; blood/PBMC as compatible fallback for both diseases" }
+        ]
+      },
+      {
+        "input_id": 4,
+        "type": "Variant B",
+        "prompt": "Design dual-disease transcriptomic study for AD + PD with full immune infiltration and single-gene GSEA.",
+        "status": "COMPLETED",
+        "basic_score": 39,
+        "specialized_score": 58,
+        "total_score": 97,
+        "assertions_passed": 5,
+        "assertions_total": 5,
+        "assertions": [
+          { "text": "All four configurations complete; Advanced correctly recommended", "result": "PASS", "note": "Full immune + GSEA requirement drives Advanced selection" },
+          { "text": "Hard Rule 5 applied: immune analysis appropriateness assessed before proceeding", "result": "PASS", "note": "Neuroinflammation justification accepted; immune analysis approved with caveats" },
+          { "text": "EPIC with brain cell-type reference is concretely recommended; CIBERSORT LM22 explicitly contraindicated for brain tissue", "result": "PASS", "note": "Concrete tool recommendation made; LM22 explicitly excluded with explanation" },
+          { "text": "Single-gene GSEA stratification method specified as high vs low expression quartile", "result": "PASS", "note": "Quartile stratification approach correctly specified" },
+          { "text": "Risk review covers brain region heterogeneity and bulk RNA deconvolution uncertainty", "result": "PASS", "note": "Both risks addressed with specific implications for AD vs PD brain region differences" }
+        ]
+      },
+      {
+        "input_id": 5,
+        "type": "Stress",
+        "prompt": "CDI + CRC shared DEGs, PPI, ROC, immune analysis, and full R code pipeline.",
+        "status": "COMPLETED",
+        "basic_score": 36,
+        "specialized_score": 52,
+        "total_score": 88,
+        "assertions_passed": 5,
+        "assertions_total": 5,
+        "assertions": [
+          { "text": "All four workload configurations are present", "result": "PASS", "note": "Complete" },
+          { "text": "All GSE IDs in R code are labeled as EXAMPLE IDs per the R Code Framework Guidelines", "result": "PASS", "note": "Every GEO accession carries the EXAMPLE ID comment; no unlabeled IDs remain" },
+          { "text": "A zero-intersection stop() guard is present in the R code immediately after the DEG intersection step", "result": "PASS", "note": "stop() with recovery message present; prevents silent downstream failure" },
+          { "text": "An AUC below 0.70 warning() is included in the R code", "result": "PASS", "note": "warning() at AUC < 0.70 with mini-signature recommendation present" },
+          { "text": "Colonic mucosal tissue is correctly mapped to CIBERSORT-X per tissue_and_tool_decisions.md", "result": "PASS", "note": "Intestinal/colonic mucosa row consulted; CIBERSORT-X specified with MuSiC as alternative" }
+        ]
+      },
+      {
+        "input_id": 6,
+        "type": "Scope Boundary",
+        "prompt": "I want to design a study for just one disease — idiopathic pulmonary fibrosis transcriptomics with hub gene discovery.",
+        "status": "COMPLETED",
+        "basic_score": 40,
+        "specialized_score": 60,
+        "total_score": 100,
+        "assertions_passed": 5,
+        "assertions_total": 5,
+        "assertions": [
+          { "text": "Input Validation section correctly triggered for single-disease request", "result": "PASS", "note": "Single disease detected; workflow not initiated" },
+          { "text": "Polite refusal template from Input Validation section is used", "result": "PASS", "note": "Template wording followed; tone appropriate" },
+          { "text": "Concrete alternative disease pair suggestions are provided to redirect the user", "result": "PASS", "note": "IPF+RA (fibrotic mechanism) and IPF+COPD (pulmonary) suggested" },
+          { "text": "Hard Rule 11 activated; dual-disease planning workflow not initiated", "result": "PASS", "note": "No configurations generated; no workflow output produced" },
+          { "text": "No partial output generated for the single-disease analysis portion", "result": "PASS", "note": "Response is purely the refusal + redirect; no DEG or hub gene instructions generated" }
+        ]
+      },
+      {
+        "input_id": 7,
+        "type": "Adversarial",
+        "prompt": "Study COVID-19 and Long COVID together. No GEO datasets. Done in one week.",
+        "status": "COMPLETED",
+        "basic_score": 37,
+        "specialized_score": 52,
+        "total_score": 89,
+        "assertions_passed": 5,
+        "assertions_total": 5,
+        "assertions": [
+          { "text": "Scope boundary assessed; COVID-19 + Long COVID accepted as valid disease pair with explicit caveats", "result": "PASS", "note": "Same-pathogen comparison scientifically valid (acute vs chronic); caveats stated" },
+          { "text": "No-data fault tolerance applied; GEO search strategy provided for both diseases", "result": "PASS", "note": "Step 4 dataset fault tolerance activated; COVID-19 and Long COVID GEO accessions identified as available" },
+          { "text": "1-week constraint handled: discovery-only scope declared; ROC and PPI infeasibility stated", "result": "PASS", "note": "DEG + Venn + GO only feasible in 1 week; hub/ROC requires 3-4 weeks minimum" },
+          { "text": "Long COVID phenotype definition caveat raised as a data quality concern", "result": "PASS", "note": "Clinical case definition must be documented in GEO Series description" },
+          { "text": "Hard Rule 9 applied: inferred default design with all assumptions explicitly stated", "result": "PASS", "note": "Assumptions listed: PBMC tissue assumed; discovery-only; time constraint-driven Lite" }
+        ]
+      }
+    ],
+    "execution_avg": 94.9,
+    "assertion_pass_rate": "35/35"
+  },
+  "final": {
+    "static_score": 96,
+    "static_weighted": 38.4,
+    "dynamic_score": 94.9,
+    "dynamic_weighted": 56.9,
+    "final_score": 95.3,
+    "grade": "Production Ready",
+    "deployable": true,
+    "veto_override": false
+  },
+  "key_strengths": [
+    "Perfect 35/35 assertion pass rate (100%) across all 7 test inputs — the tissue_and_tool_decisions.md and R Code Framework Guidelines resolved all previously failing assertions by providing structured, class-specific decision rules accessible at execution time.",
+    "tissue_and_tool_decisions.md eliminates the two most impactful pre-polish failures: T2D tissue ambiguity (Input 2) and brain deconvolution tool selection (Input 4) are now resolved with concrete, actionable decision rules rather than surfaced-but-unresolved caveats.",
+    "R Code Framework Guidelines with mandatory EXAMPLE ID convention, zero-intersection stop() guard, and AUC warning() transform Input 5 from 2/5 assertions to 5/5 — code output is now fully mandated and reproducible.",
+    "Input Validation section correctly handles the scope boundary test (Input 6) with a polite refusal and concrete disease-pair redirect suggestions — a previously absent capability now working perfectly.",
+    "Progressive disclosure fully implemented: 4 reference files (tissue/tool decisions, GEO search, figure templates, upgrade path) enable independent maintenance while SKILL.md retains clean, readable core instructions."
+  ],
+  "recommendations": [
+    {
+      "priority": "P2",
+      "title": "Add a canonical usage example with expected output structure to improve testability",
+      "observed_in": [],
+      "problem": "The skill has no documented example test input with expected output, making automated regression testing difficult if the skill is updated in future. Static Maintainability Testability scored 3/4.",
+      "root_cause": "No Usage Examples section or example test case anchor exists in SKILL.md.",
+      "fix": "Add a Usage Examples section at the end of SKILL.md with one canonical example (e.g., intracranial aneurysm + AAA) showing the expected structure of the four-configuration output block. Include the recommended configuration and one-sentence justification as the expected answer pattern."
+    },
+    {
+      "priority": "P2",
+      "title": "Add an explicit MCODE failure fallback to the fault tolerance section",
+      "observed_in": [1, 2, 4],
+      "problem": "The zero-DEG fallback is now explicit, but there is no guidance for when MCODE finds no dense clusters in the PPI network — a common failure when the PPI network is sparse.",
+      "root_cause": "Step 4 fault tolerance covers DEG intersection and ROC but not the PPI/hub prioritization step.",
+      "fix": "Add to Step 4 under PPI & Hub Prioritization: 'Failure point: MCODE identifies no dense clusters. Recovery: (1) Lower MCODE score cutoff from 0.8 to 0.2; (2) Use STRING network directly ranked by Degree without MCODE pre-filtering; (3) Reduce hub candidate set to top-10 by Degree only and note MCODE step was skipped.'"
+    }
+  ]
+}
