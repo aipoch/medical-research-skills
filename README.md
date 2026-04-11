@@ -58,6 +58,10 @@ The library is primarily organized into five categories: ​**Evidence Insights,
 
 **📌 Total Skills in Library: 420 and growing**
 
+## Complementary External Literature Source
+
+While AIPOCH skills are developed in-house, **[Paperzilla](https://github.com/paperzilla-ai/paperzilla-skills)** is a useful external complement for biology and medical literature monitoring. It currently supports project-based bioRxiv and medRxiv feeds, lets agents fetch paper markdown for summarization and relevance assessment, and has PubMed support planned. The OpenClaw distribution is also available on [ClawHub](https://clawhub.ai/pors/paperzilla).
+
 ## 🎬 AIPOCH Medical Research Skills — Demo
 
 <p align="center">
