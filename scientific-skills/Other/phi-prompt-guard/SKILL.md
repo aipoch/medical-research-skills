@@ -2,7 +2,7 @@
 name: phi-prompt-guard
 description: Runtime, prompt-time guardrail that prevents Protected Health Information (PHI) from entering the LLM context. Use when the user is about to paste, query, or read clinical/patient data, or when an action (DB query, file read, tool output) may pull PHI into the conversation. Distinct from hipaa-compliance-auditor, which de-identifies static text/files; this skill guards the live agent conversation. Honors a [PHI-OK] attestation for synthetic / test data.
 license: MIT
-author: ndu-bioinfo
+author: "[@ndu-bioinfo](https://github.com/ndu-bioinfo)"
 ---
 > **Source**: [https://github.com/aipoch/medical-research-skills](https://github.com/aipoch/medical-research-skills)
 
