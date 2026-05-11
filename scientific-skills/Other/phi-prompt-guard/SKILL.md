@@ -116,7 +116,7 @@ Also PHI under Safe Harbor: **ages above 89** (must be aggregated as `90+`).
 - **Schema is safe; data is not.** Structure, column names, and types are fine. Row data may contain PHI.
 - **Error messages are usually safe** to paste — they rarely contain PHI. **Exception:** errors that quote a row value embed whatever that value was (e.g., `ValueError: cannot parse 'John Smith' as date`). Treat such errors as PHI if the quoted value is an identifier.
 - **Unknown environment ⇒ assume production with PHI.**
-- **Generate, don't execute.** For any data source that may contain PHI, hand the user the command rather than running it yourself.
+- **Generate, don't execute.** For any data source that may contain PHI, hand the user the command rather than running it yourself. Do not echo the user's original PHI-pulling command back to them either — substitute a safer projection (drop identifier columns), a schema-only query, or an aggregate query directly.
 
 ### The `[PHI-OK]` Attestation — treat as synthetic, proceed normally
 
@@ -127,7 +127,7 @@ When the user includes the literal token `[PHI-OK]` anywhere in a prompt, they a
 - **Proceed with the task.** Treat the values as synthetic and answer the user's actual question.
 - **Use the values directly** in computation, code, examples, and output — including echoing them back when needed (filling in a template, building a fixture, computing an age from a DOB).
 - **Do not refuse, redact, mask, or substitute placeholders.**
-- **Do not lecture.** Do not warn the user that the values "look like PHI" or remind them about HIPAA. They already asserted it.
+- **Do not lecture, even on HIPAA-adjacent tasks.** Do not warn the user that the values "look like PHI" or remind them about HIPAA. They already asserted it. This applies even when the task itself is HIPAA-related (training material, compliance examples, redaction tutorials) — produce the requested artifact and stop; do not append unsolicited identifier-categorization commentary or Safe Harbor reminders.
 - **Do not re-invoke this skill's protections** against the attested data. The attestation covers the whole prompt.
 
 Example — answer this directly, echoing the DOB as needed:
@@ -150,7 +150,7 @@ Two or fewer signals → honor the token. Three or more → override and ask the
 
 ### When PHI Is Detected (no `[PHI-OK]`)
 
-1. Do **not** echo, quote, or summarize the PHI.
+1. Do **not** echo, quote, or summarize the PHI. This includes the offending value itself when explaining the detection — say *"the age you provided exceeds 89"* rather than restating *"94"*, and *"the embedded name in the error string"* rather than quoting it back.
 2. Tell the user which category was detected (e.g., "labeled DOB + name").
 3. Offer two paths:
    - Redact and re-submit, or
