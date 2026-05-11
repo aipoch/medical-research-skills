@@ -8,7 +8,7 @@ author: AIPOCH
 
 # PHI Prompt Guard
 
-A behavioral skill that instructs the agent to refuse, redact, or redirect when the live prompt — or an action the agent is about to take — would push Protected Health Information (PHI) into the LLM context window.
+A behavioral skill that instructs the agent to refuse, redact, or redirect when the live prompt — or an action the agent is about to take — would push Protected Health Information (PHI) into the LLM context window. Operates under the assumption that no Business Associate Agreement exists with the LLM provider: any data placed in the prompt is sent to a third-party API outside the organization's control and may be cached or logged depending on vendor terms.
 
 ## When to Use
 
@@ -17,10 +17,6 @@ A behavioral skill that instructs the agent to refuse, redact, or redirect when 
 - The agent is about to read a file whose contents may contain identifiers (lab reports, EHR exports, accession-keyed CSVs).
 - Discussion involves keywords such as: `patient`, `clinical`, `accession`, `phi`, `hipaa`, `mrn`, `medical record`, `health plan`, `social security`.
 - The environment is unknown — assume production with PHI by default.
-
-## Operating Assumption
-
-No Business Associate Agreement (BAA) exists with the LLM provider. Any data placed in the prompt is sent to a third-party API outside the organization's control and may be cached or logged depending on vendor terms.
 
 ## Your Responsibilities (the agent)
 
@@ -96,19 +92,6 @@ Not: *"I can't process that DOB…"*
    - Re-submit with `[PHI-OK]` if the data is synthetic / test.
 4. If a clinical question underlies the prompt, answer it generically using only non-identifying information (e.g., birth year + dx year for age-at-diagnosis).
 
-## Defense in Depth — Optional Hook-Based Enforcement
-
-This skill is a **behavioral** layer that runs inside any agent framework (OpenClaw, Hermes, Claude Code). For Claude Code users who want hard, deterministic enforcement at the prompt boundary, a companion plugin ships hooks that block PHI before it ever reaches the model:
-
-| Layer | Mechanism | Behavior |
-|---|---|---|
-| Prompt scanner | `UserPromptSubmit` hook | **Blocks** prompts with high-confidence PHI patterns unless `[PHI-OK]` |
-| Skill injection | `UserPromptSubmit` hook | Loads this skill when PHI keywords appear |
-| DB client guard | `PreToolUse:Bash` hook | Asks before running database / dump tools |
-| **Model (this skill)** | In-context reasoning | Catches what the regex missed; guards action-initiated PHI exposure |
-
-The hook layer is Claude-Code-specific and lives in a separate plugin repo (`phi-guard-skill`). This SKILL.md alone is portable across every agent framework this library targets.
-
 ## Dependencies
 
 - None (documentation-only behavioral skill).
@@ -141,7 +124,4 @@ Correct agent behavior: answer directly — `Age at diagnosis = 35`. No refusal,
 
 ## Implementation Details
 
-- Execution model: pure in-context reasoning; no scripts, no external services.
-- Inputs: the live prompt plus any tool output the agent is considering.
-- Outputs: either (a) a refusal-with-redirect when PHI is detected, (b) a generated-but-unexecuted command when an action would pull PHI in, or (c) a normal task response when `[PHI-OK]` is present or no PHI is present.
-- No state is persisted; every prompt is evaluated independently.
+- Pure in-context behavioral skill — no scripts, no external services, no persisted state.
