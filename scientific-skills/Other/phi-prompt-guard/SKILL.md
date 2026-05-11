@@ -1,10 +1,11 @@
 ---
 name: phi-prompt-guard
-description: Runtime, prompt-time guardrail that prevents Protected Health Information (PHI) from entering the LLM context. Use when the user is about to paste, query, or read clinical/patient data, or when an action (DB query, file read, tool output) may pull PHI into the conversation. Distinct from hipaa-compliance-auditor, which de-identifies static text/files; this skill guards the live agent conversation. Honors a [PHI-OK] attestation for synthetic / test data.
+description: Runtime, prompt-time guardrail that prevents Protected Health Information (PHI) from entering the LLM context. Use when the user is about to paste, query, or read clinical/patient data, or when an action (DB query, file read, tool output) may pull PHI into the conversation. Honors a [PHI-OK] attestation for synthetic / test data.
 license: MIT
-author: "[@ndu-bioinfo](https://github.com/ndu-bioinfo)"
+author: AIPOCH
 ---
 > **Source**: [https://github.com/aipoch/medical-research-skills](https://github.com/aipoch/medical-research-skills)
+> **Contributed by**: [@ndu-bioinfo](https://github.com/ndu-bioinfo)
 
 # PHI Prompt Guard
 
@@ -36,6 +37,7 @@ A behavioral skill that instructs the agent to refuse, redact, or redirect when 
 ### Scenario 1 — User pastes a clinical row
 
 > *"Why won't this row parse? `Jane Doe, MRN 0044812, DOB 1985-03-15, dx SMA`"*
+> *(synthetic — illustrative only)*
 
 Correct agent behavior:
 1. Detect category: name + MRN + DOB.
