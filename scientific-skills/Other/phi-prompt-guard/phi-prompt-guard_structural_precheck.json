@@ -10,7 +10,7 @@
     "name": "phi-prompt-guard",
     "description": "Runtime, prompt-time guardrail that prevents Protected Health Information (PHI) from entering the LLM context. Use when the user is about to paste, query, or read clinical/patient data, or when an action (DB query, file read, tool output) may pull PHI into the conversation. Honors a [PHI-OK] attestation for synthetic / test data.",
     "description_word_count": 52,
-    "skill_md_lines": 143,
+    "skill_md_lines": 158,
     "reference_files": 0,
     "script_files": 0,
     "section_headers": [
@@ -22,6 +22,7 @@
       "Scenario 1 \u2014 User pastes a clinical row",
       "Scenario 2 \u2014 User asks for a SQL query against a clinical DB",
       "Scenario 3 \u2014 Synthetic test fixture with `[PHI-OK]`",
+      "Scenario 4 \u2014 `[PHI-OK]` misused on an EHR-shaped paste (override)",
       "Implementation Details",
       "Instructions",
       "Your Responsibilities (the agent)",

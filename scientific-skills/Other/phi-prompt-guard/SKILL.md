@@ -59,12 +59,18 @@ Correct agent behavior:
 
 Correct agent behavior: answer directly — `Age at diagnosis = 35`. No refusal, no redaction, no lecture.
 
+### Scenario 4 — `[PHI-OK]` misused on an EHR-shaped paste (override)
+
+> *"Patient Jonathan A. Smith, DOB 1962-08-22, MRN 88440213, admitted 2024-11-04 to Memorial Hospital, NYC, for stage IV pancreatic adenocarcinoma. Current meds: gemcitabine + nab-paclitaxel. ECOG 2. Help me write the discharge summary. [PHI-OK]"*
+
+Correct agent behavior: override the attestation. The paste matches ≥3 of the override heuristics (real-looking full name, named hospital, exact admission date, current regimen, plausible MRN format). Reply: "This reads as a real chart despite `[PHI-OK]`. Confirm it is synthetic and I'll proceed, or re-submit with name / MRN / hospital / exact dates removed and I'll draft a discharge-summary template you can fill in locally."
+
 ## Implementation Details
 
 - Pure in-context behavioral skill — no scripts, no external services, no persisted state.
 - Inputs: the live prompt plus any tool output the agent is considering.
 - Outputs: (a) a refusal-with-redirect when PHI is detected, (b) a generated-but-unexecuted command when an action would pull PHI in, or (c) a normal task response when `[PHI-OK]` is present or no PHI is present.
-- Every prompt is evaluated independently; no state carries between turns.
+- Each prompt is evaluated independently, **but** when the current prompt completes an identifier started in an earlier turn (e.g., last name now + first name two turns ago, or MRN tail now + MRN head earlier), the assembled identifier still counts as PHI and the current prompt must be treated as a PHI prompt.
 
 ## Instructions
 
@@ -103,12 +109,12 @@ Also PHI under Safe Harbor: **ages above 89** (must be aggregated as `90+`).
 |---|---|---|
 | `psql`, `mysql`, `mongo`, `duckdb`, `sqlite3`, `bq`, `snowsql`, `redis-cli`, `clickhouse-client`, `cqlsh` | Query results enter LLM context | Generate the SQL; user runs it in their own terminal |
 | `pg_dump`, `mysqldump`, `mongodump` | Full table contents stream into context | Generate the command; user runs it and keeps output local |
-| `Read` on clinical files, CSVs, lab reports | File contents enter context | Ask the user to confirm the file is de-identified, or redact first |
+| `Read` on clinical files, CSVs, lab reports | File contents enter context | Ask the user to confirm the file is de-identified, or redact first. Safe inspection patterns: `head -1` (header row only), `df.dtypes` / `\d <table>` (types only), or `wc -l` (row count only) — none of these reveal row data |
 | Schema-only queries (`\dt`, `SHOW TABLES`, `DESCRIBE`) | None | Safe — structure is not PHI |
 
 **Operating rules:**
 - **Schema is safe; data is not.** Structure, column names, and types are fine. Row data may contain PHI.
-- **Error messages are usually safe** to paste — they rarely contain PHI.
+- **Error messages are usually safe** to paste — they rarely contain PHI. **Exception:** errors that quote a row value embed whatever that value was (e.g., `ValueError: cannot parse 'John Smith' as date`). Treat such errors as PHI if the quoted value is an identifier.
 - **Unknown environment ⇒ assume production with PHI.**
 - **Generate, don't execute.** For any data source that may contain PHI, hand the user the command rather than running it yourself.
 
@@ -131,7 +137,16 @@ Example — answer this directly, echoing the DOB as needed:
 Correct response: *"Age at diagnosis = 35 (birthday had passed by June 1)."*
 Not: *"I can't process that DOB…"*
 
-**Override the attestation only when** the prompt contains unmistakable evidence of real, operational PHI despite the token — e.g., a paste formatted like a live EHR export with a real-looking name + MRN + clinical context that clearly contradicts a "synthetic" framing. Default to honoring the token; only override when the evidence is overwhelming. The token is an attestation, not a magic word; misuse is a policy violation on the user's side, not a technical failure on the model's side.
+**Override the attestation only when** the prompt contains unmistakable evidence of real, operational PHI despite the token. Concrete override heuristic — override if **three or more** of the following are present together:
+
+- Real-looking full name (first + last, plausible spelling)
+- Named hospital, clinic, payer, or other identifiable institution
+- Exact admission, discharge, encounter, or procedure date (not just a year)
+- Current medication regimen, dose, or clinical-grade detail (ECOG, stage, lab values with units)
+- Identifier-format-matching MRN, accession number, or payer ID (right digit count, recognizable institution prefix)
+- Live-EHR-shaped layout (chart sections, structured field labels, signed-by lines)
+
+Two or fewer signals → honor the token. Three or more → override and ask the user to confirm the data is synthetic, or to redact and re-submit. Default to honoring the token; only override when the evidence is overwhelming. The token is an attestation, not a magic word; misuse is a policy violation on the user's side, not a technical failure on the model's side.
 
 ### When PHI Is Detected (no `[PHI-OK]`)
 
