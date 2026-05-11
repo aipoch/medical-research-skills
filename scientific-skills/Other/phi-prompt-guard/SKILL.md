@@ -10,15 +10,6 @@ author: AIPOCH
 
 A behavioral skill that instructs the agent to refuse, redact, or redirect when the live prompt — or an action the agent is about to take — would push Protected Health Information (PHI) into the LLM context window.
 
-## How this differs from `hipaa-compliance-auditor`
-
-| Skill | Mode | Operates on | When it runs |
-|---|---|---|---|
-| `hipaa-compliance-auditor` | Batch text de-identification (Python: spaCy / Presidio / regex) | Static files, CSVs, manuscript text you already have on disk | After data is collected, before publication |
-| **`phi-prompt-guard`** (this skill) | In-context behavioral guard for the agent | The live prompt, tool output, and data the agent is about to fetch | Continuously, during the conversation |
-
-They share the HIPAA Safe Harbor 18-identifier taxonomy but sit at opposite ends of the data-flow. Use the auditor to clean a corpus; use this skill to keep PHI from ever entering the agent's context.
-
 ## When to Use
 
 - The user pastes (or is about to paste) clinical, patient, or specimen data into the conversation.
@@ -66,7 +57,7 @@ Also PHI under Safe Harbor: **ages above 89** (must be aggregated as `90+`).
 |---|---|---|
 | `psql`, `mysql`, `mongo`, `duckdb`, `sqlite3`, `bq`, `snowsql`, `redis-cli`, `clickhouse-client`, `cqlsh` | Query results enter LLM context | Generate the SQL; user runs it in their own terminal |
 | `pg_dump`, `mysqldump`, `mongodump` | Full table contents stream into context | Generate the command; user runs it and keeps output local |
-| `Read` on clinical files, CSVs, lab reports | File contents enter context | Ask the user to confirm the file is de-identified, or redact first (see `hipaa-compliance-auditor`) |
+| `Read` on clinical files, CSVs, lab reports | File contents enter context | Ask the user to confirm the file is de-identified, or redact first |
 | Schema-only queries (`\dt`, `SHOW TABLES`, `DESCRIBE`) | None | Safe — structure is not PHI |
 
 **Operating rules:**
@@ -121,7 +112,6 @@ The hook layer is Claude-Code-specific and lives in a separate plugin repo (`phi
 ## Dependencies
 
 - None (documentation-only behavioral skill).
-- Complementary skill: `scientific-skills/Academic Writing/hipaa-compliance-auditor` for batch de-identification of static text/files.
 
 ## Example Usage
 
