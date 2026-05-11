@@ -1,0 +1,50 @@
+{
+  "step1_basic_veto": {
+    "T1. Stability": "PASS",
+    "T2. Contract": "PASS",
+    "T3. Determinism": "PASS",
+    "T4. Security": "PASS"
+  },
+  "gate_result": "PASSED Step 1 \u2014 proceed to Steps 2\u20138",
+  "step2_static_metadata": {
+    "name": "phi-prompt-guard",
+    "description": "Runtime, prompt-time guardrail that prevents Protected Health Information (PHI) from entering the LLM context. Use when the user is about to paste, query, or read clinical/patient data, or when an action (DB query, file read, tool output) may pull PHI into the conversation. Distinct from hipaa-compliance-auditor, which de-identifies static text/files; this skill guards the live agent conversation. Honors a [PHI-OK] attestation for synthetic / test data.",
+    "description_word_count": 66,
+    "skill_md_lines": 141,
+    "reference_files": 0,
+    "script_files": 0,
+    "section_headers": [
+      "PHI Prompt Guard",
+      "When to Use",
+      "Key Features",
+      "Dependencies",
+      "Example Usage",
+      "Scenario 1 \u2014 User pastes a clinical row",
+      "Scenario 2 \u2014 User asks for a SQL query against a clinical DB",
+      "Scenario 3 \u2014 Synthetic test fixture with `[PHI-OK]`",
+      "Implementation Details",
+      "Instructions",
+      "Your Responsibilities (the agent)",
+      "The 18 HIPAA Identifiers (never let into LLM context)",
+      "Actions That Can Pull PHI Into Context",
+      "The `[PHI-OK]` Attestation \u2014 treat as synthetic, proceed normally",
+      "When PHI Is Detected (no `[PHI-OK]`)"
+    ],
+    "has_code_blocks": false,
+    "has_when_to_use_section": true,
+    "has_workflow_section": false
+  },
+  "step3_classification": {
+    "category": "Other",
+    "execution_mode": "C (API)",
+    "category_keyword_scores": {
+      "research_data": 0,
+      "research_text": 0
+    }
+  },
+  "step4_complexity": {
+    "level": "Moderate",
+    "n_inputs": 5
+  },
+  "instructions_for_claude": "Structural pre-check complete. Proceed with Steps 2\u20138 using SKILL.md instructions.\n  Category: Other\n  Execution Mode: C (API)\n  Complexity: Moderate \u2192 Generate 5 test inputs in Step 4."
+}
