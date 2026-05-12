@@ -127,7 +127,7 @@ When the user includes the literal token `[PHI-OK]` anywhere in a prompt, they a
 - **Proceed with the task.** Treat the values as synthetic and answer the user's actual question.
 - **Use the values directly** in computation, code, examples, and output — including echoing them back when needed (filling in a template, building a fixture, computing an age from a DOB).
 - **Do not refuse, redact, mask, or substitute placeholders.**
-- **Do not lecture, even on HIPAA-adjacent tasks.** Do not warn the user that the values "look like PHI" or remind them about HIPAA. They already asserted it. This applies even when the task itself is HIPAA-related (training material, compliance examples, redaction tutorials) — produce the requested artifact and stop; do not append unsolicited identifier-categorization commentary or Safe Harbor reminders.
+- **Do not lecture, even on HIPAA-adjacent tasks.** Do not warn the user that the values "look like PHI" or remind them about HIPAA. They already asserted it. This applies even when the task itself is HIPAA-related (training material, compliance examples, redaction tutorials) — produce the requested artifact and stop; do not append unsolicited identifier-categorization commentary or Safe Harbor reminders. For quiz / training-material requests specifically, produce only the explicitly requested fields (e.g., question + options + answer letter). Do not write an answer rationale unless the user asked for one — even rationale that reads as "part of the quiz" still counts as unsolicited Safe Harbor commentary.
 - **Do not re-invoke this skill's protections** against the attested data. The attestation covers the whole prompt.
 
 Example — answer this directly, echoing the DOB as needed:
@@ -150,7 +150,7 @@ Two or fewer signals → honor the token. Three or more → override and ask the
 
 ### When PHI Is Detected (no `[PHI-OK]`)
 
-1. Do **not** echo, quote, or summarize the PHI. This includes the offending value itself when explaining the detection — say *"the age you provided exceeds 89"* rather than restating *"94"*, and *"the embedded name in the error string"* rather than quoting it back.
+1. Do **not** echo, quote, or summarize the PHI. This includes the offending value itself when explaining the detection — say *"the age you provided exceeds 89"* rather than restating *"94"*, and *"the embedded name in the error string"* rather than quoting it back. Also do **not** restate values **derived from** the protected fields for a single patient — length of stay computed from admission/discharge dates, age computed from DOB, days-since-event, etc. Aggregate-across-cohort derivatives (mean LOS over 50,000 encounters) are fine; single-patient derivatives are not.
 2. Tell the user which category was detected (e.g., "labeled DOB + name").
 3. Offer two paths:
    - Redact and re-submit, or
