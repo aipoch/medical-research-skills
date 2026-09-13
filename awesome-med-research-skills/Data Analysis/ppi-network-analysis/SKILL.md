@@ -12,6 +12,7 @@ author: AIPOCH
 
 | Situation | File to Read | Purpose |
 |-----------|--------------|---------|
+| Preparing a full analysis or missing the STRING dataset | `references/external-data.md` | Provision and verify the external v11.5 dataset before analysis |
 | Need algorithm details | `references/algorithm.md` | Explain local STRING mapping, interaction filtering, network metrics, and plot interpretation |
 | Need to execute the analysis | `scripts/main.R` | Run the CLI entry point with a complete `Rscript` command |
 | Encounter an error | `references/troubleshooting.md` | Map standardized error codes to causes and fixes |
@@ -20,11 +21,19 @@ author: AIPOCH
 
 ## Usage
 
+Before a full analysis, follow `references/external-data.md` to prepare the six
+STRING v11.5 files outside the installed Skill. Set `PPI_STRING_CACHE` to that
+verified directory. The Skill package contains the gene-list example, code and
+documentation; STRING tables are provisioned separately. If the directory or
+required files are unavailable, stop and complete that preparation first.
+
 ```bash
 Rscript scripts/main.R \
   --genelist_file ./input/gene_list.csv \
   --species human \
   --threshold 700 \
+  --string_cache_dir "$PPI_STRING_CACHE" \
+  --string_version v11.5 \
   --output_dir output/basic-run \
   --seed 42 \
   --timeout_seconds 600
@@ -49,8 +58,8 @@ Rscript scripts/main.R \
 | `-p` | `--plot_only` | logical | `FALSE` | no | Reuse `output_dir/data/ppi_result.rds` and regenerate the network plot |
 | `-d` | `--seed` | integer | `42` | no | Random seed used for layout reproducibility |
 | `-u` | `--timeout_seconds` | integer | `600` | no | Elapsed time limit in seconds |
-|  | `--string_cache_dir` | character | `references/string_cache` | no | Local STRING cache directory; if omitted, the bundled cache inside the skill is used |
-|  | `--string_version` | character | `auto` | no | Preferred STRING cache version; use `auto`, `v11.5`, or `v12.0` when available |
+|  | `--string_cache_dir` | character | `references/string_cache` (unpopulated) | supply for full analysis | Verified external STRING data directory; see `references/external-data.md` |
+|  | `--string_version` | character | `auto` | no | Use explicit `v11.5` for the separately provisioned dataset; `auto` selects each table independently |
 |  | `--figure_family` | character | `sans` | no | PDF font family: `sans`, `serif`, or `mono` |
 |  | `--figure_width` | numeric | `12` | no | Plot width in inches |
 |  | `--figure_height` | numeric | `10` | no | Plot height in inches |
@@ -143,13 +152,15 @@ Detailed fixes and troubleshooting steps: READ `references/troubleshooting.md`
 
 ## Testing
 
-### Smoke test with bundled data
+### Smoke test with the bundled gene list and external STRING data
 
 ```bash
 Rscript scripts/main.R \
   --genelist_file tests/data/gene_list.csv \
   --species human \
   --threshold 700 \
+  --string_cache_dir "$PPI_STRING_CACHE" \
+  --string_version v11.5 \
   --output_dir tests/output/basic-run
 ```
 

@@ -59,7 +59,9 @@ This normalized species metadata is then used to locate the matching local STRIN
 
 ## Local STRING Cache Requirements
 
-The analysis runs entirely from local cache files and requires three STRING tables for the selected species:
+The analysis runs from a separately provisioned directory passed with
+`--string_cache_dir`; see [external data preparation](external-data.md). It
+requires three STRING tables for the selected species:
 
 - aliases file
 - protein info file
@@ -70,7 +72,10 @@ For example, a valid human cache version may include:
 - `9606.protein.info.v11.5.txt.gz`
 - `9606.protein.links.v11.5.txt.gz`
 
-When `--string_version auto` is used, the newest available local version is selected. If a specific version such as `v11.5` or `v12.0` is requested, all three matching files must be present.
+Pass `--string_version v11.5` for the verified external dataset. All three files
+for the selected species must match that version. The existing `auto` mode
+selects each table independently and can mix versions if the directory contains
+an incomplete set of newer tables.
 
 ## Gene-to-STRING Mapping Logic
 
