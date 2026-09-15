@@ -2,12 +2,15 @@
 
 [![License](https://img.shields.io/badge/License-MIT-ff6b6b?style=for-the-badge)](./LICENSE)
 ![Skills Count](https://img.shields.io/badge/Skills-500%2B-4dabf7?style=for-the-badge)
-![Work%20with](https://img.shields.io/badge/Work%20with-OpenClaw%20%7C%20Opencode%20%7C%20Claude%20Code-9775fa?style=for-the-badge)
 [![Follow on X](https://img.shields.io/badge/Follow%20on%20X-%40aipoch__ai-212529?style=for-the-badge&logo=x&logoColor=white)](https://x.com/aipoch_ai)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-AIPOCH-0a66c2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/company/pochai)
 [![YouTube](https://img.shields.io/badge/YouTube-%40AIPOCH__AI-ff0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@AIPOCH_AI)
 
-A curated library of 550+ medical research agent skills created by [AIPOCH](https://www.aipoch.com), designed to work with **Claude Code​, ​Codex​, ​Open Code​, ​Hermes​ Agent, ​OpenClaw**, and other SKILL.md-compatible agent platforms. It supports the research workflow across four core areas: Evidence Insights, Protocol Design, Data Analysis, and Academic Writing. Built exclusively for ​medical and biomedical researchers​. Every skill in this library is reviewed and evaluated through [**MedSkillAudit**](https://www.aipoch.com/benchmark)—  A Domain-Specific Audit Framework for Medical Research Agent Skills — before going live. Equip your AI agent with AIPOCH medical research skills, and turn it into a capable medical research assistant.
+A curated library of 550+ medical research agent skills created by [AIPOCH](https://www.aipoch.com), designed to work with **Claude Code, Codex**, and other `SKILL.md`-compatible agent platforms. It supports the research workflow across four core areas: Evidence Insights, Protocol Design, Data Analysis, and Academic Writing. Built exclusively for medical and biomedical researchers.
+
+[**AIPOCH Open-Science**](https://github.com/aipoch/open-science), AIPOCH's open-source AI research workbench, includes a selection of the skills from this library for use within its research workspace.
+
+Every skill in this library is reviewed and evaluated through [**MedSkillAudit**](https://www.aipoch.com/benchmark) — A Domain-Specific Audit Framework for Medical Research Agent Skills — before going live. Equip your AI agent with AIPOCH medical research skills, and turn it into a capable medical research assistant.
 
 > ⭐ **Star this repo** — the library is actively maintained and grows with new skills, improvements, and fixes regularly. Hit the star button to keep it close, stay current with the latest releases, and help more researchers discover Medical Research Agent Skills. Every star directly supports the continued development of this library.
 
@@ -19,23 +22,21 @@ A curated library of 550+ medical research agent skills created by [AIPOCH](http
 
 ---
 
-> 💡**New:** We are launching Open Science, an open-source, model-agnostic AI workbench designed to support scientific discovery workflows. [Learn more](https://github.com/aipoch/open-science)
+> 💡 **Use selected skills in AIPOCH Open-Science:** Work with scientific agents, Python/R notebooks, and research files in one open-source, model-agnostic workspace. AIPOCH Open-Science includes a subset of this library. [Get started with AIPOCH Open-Science](https://github.com/aipoch/open-science#-quick-start).
 
 > **MedSkillAudit** - a domain-specific audit framework for medical research agent skills. [Try skill-auditor here.](https://github.com/aipoch/medical-research-skills/tree/main/skill-auditor)
 
 ## 🗂️ Skills Overview
 
-All skills in AIPOCH are ​**originally designed and developed in-house**​, built to reflect medical research workflows and standards. The library is primarily organized into five categories: ​**Evidence Insights, Protocol Design, ​Data Analysis,  Academic Writing**​, and Others.
+All skills in AIPOCH are ​**originally designed and developed in-house**​, built to reflect medical research workflows and standards. The library is primarily organized into five categories: ​**Evidence Insights, Protocol Design, ​Data Analysis, Academic Writing**​, and Others.
 
-| 📚**Category** | **Highlights**                                                                                                                        |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-|🔍 **Evidence Insight**   | e.g., search strategy design, database selection, evidence-level prioritization, critical appraisal, literature synthesis and gap identification.|
-| 🧪 **Protocol Design**    |e.g., experimental design generation, study type selection, causal inference planning, statistical power calculation, validation strategy.        |
-|📊 **Data Analysis**      | e.g., R/Python bioinformatics code generation, statistical modeling, data cleaning pipelines, machine learning workflows, result visualization.  |
-|✍️ **Academic Writing**   |  e.g., SCI manuscript drafting, methods/results/discussion writing, meta-analysis narrative, cover letters, abstract generation.|
-| 🌍 **Other (General / Non-Research)**          | all general skills that do not fall into categories 1–4.                                                                                   |
-
-**📌 Total Skills in Library: 554 and growing**
+| 📚**Category**                        | **Highlights**                                                                                                                                    |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 🔍 **Evidence Insight**               | e.g., search strategy design, database selection, evidence-level prioritization, critical appraisal, literature synthesis and gap identification. |
+| 🧪 **Protocol Design**                | e.g., experimental design generation, study type selection, causal inference planning, statistical power calculation, validation strategy.        |
+| 📊 **Data Analysis**                  | e.g., R/Python bioinformatics code generation, statistical modeling, data cleaning pipelines, machine learning workflows, result visualization.   |
+| ✍️ **Academic Writing**               | e.g., SCI manuscript drafting, methods/results/discussion writing, meta-analysis narrative, cover letters, abstract generation.                   |
+| 🌍 **Other (General / Non-Research)** | all general skills that do not fall into categories 1–4.                                                                                          |
 
 ## 🗂️ Browse by Research Stage
 
@@ -125,96 +126,17 @@ The operational layer of a medical research lab — from reagent tracking and fi
 
 ## 🚀 How to Start?
 
-### ⚙️ Requirements
+Use this library with **Claude Code**, **Codex**, or another agent platform that supports `SKILL.md` skills.
 
-​**Host Platform**​: OpenClaw (installed and running) or **any compatible AI Agent framework that supports Skill integration**.
+1. Browse the [`scientific-skills`](./scientific-skills) and [`awesome-med-research-skills`](./awesome-med-research-skills) directories to choose a skill.
+2. Download the selected skill folder, or clone this repository with Git:
 
-If you don't have OpenClaw, [please follow the official OpenClaw setup guide.](https://github.com/openclaw/openclaw)
+   ```bash
+   git clone https://github.com/aipoch/medical-research-skills.git
+   ```
 
-​**Git**​: Required for cloning the repository. [Git LFS](https://git-lfs.com/)
-
-### 🦞 Connect with OpenClaw
-
-#### **Method 1:**
-
-**I'm a human**
-
-```markdown
-curl -sL https://aipoch.com/skill.md > ./skills/aipoch.md
-```
-
-1. Run the command to initialize setup
-2. Select 'OpenClaw' as your target agent
-3. Follow the prompts to link your library
-
-**I'm an agent**
-
-```markdown
-Read https://aipoch.com/skill.md and follow the instructions to join Aipoch
-```
-
-1. Download the integration guide
-2. Manually configure your agent's skill path
-3. Verify the connection in your dashboard
-
----
-
-#### **Method 2:**
-
-**🦞 Install into OpenClaw Plug-in**
-
-[OpenClaw](https://openclaw.ai) is a self-hosted AI agent gateway. You can install all AIPOCH skills into OpenClaw with a single command.
-
-**macOS / Linux / WSL:**
-
-```bash
-bash <(curl -s https://raw.githubusercontent.com/aipoch/medical-research-skills/main/scientific-skills/scripts/openclaw-install.sh)
-```
-
-**Windows (Git Bash):**
-
-```bash
-curl -s https://raw.githubusercontent.com/aipoch/medical-research-skills/main/scientific-skills/scripts/openclaw-install.sh -o /tmp/install.sh
-bash /tmp/install.sh
-```
-
-The script will:
-
-1. Clone this repository into a temporary directory
-2. Copy all `SKILL.md` skill folders into `~/.openclaw/skills/`
-3. Skip any skills that are already installed
-
-After installation, restart your gateway to pick up the new skills:
-
-```bash
-openclaw gateway restart
-```
-
-> **Tip:** Run with `--dry-run` first to preview what will be installed without making any changes.
-> 
-> ```bash
-> bash <(curl -s https://raw.githubusercontent.com/aipoch/medical-research-skills/main/scientific-skills/scripts/openclaw-install.sh) --dry-run
-> ```
-
-> **Note:** Skills are installed to `~/.openclaw/skills/` by default (visible to all agents). To install into a specific workspace instead, set the environment variable before running:
-> 
-> ```bash
-> OPENCLAW_SKILLS_DIR=~/.openclaw/workspace/skills bash <(curl -s https://raw.githubusercontent.com/aipoch/medical-research-skills/main/scientific-skills/scripts/openclaw-install.sh)
-> ```
-
----
-
-## 🎬 AIPOCH Medical Research Skills — Demo
-
-<p align="center">
-  <a href="https://www.youtube.com/watch?v=Pq4E9mCO1t8" target="_blank">
-<img width="4480" height="2516" alt="medical research literature reader pro" src="https://github.com/user-attachments/assets/c3de83ec-43d8-4c37-8079-6354c138b0fa" />
-  </a>
-</p>
-
-<p align="center">
-A brief showcase of AIPOCH Medical Research Skills in action across research workflows.
-</p>
+3. Follow your agent platform's skill installation instructions to add the complete skill folder, including its `SKILL.md` and supporting files.
+4. Review the skill's requirements, configure any dependencies or credentials it needs, and follow your platform's instructions to enable and use it.
 
 ## What is Awesome Med Research Skills?
 
@@ -222,21 +144,21 @@ A brief showcase of AIPOCH Medical Research Skills in action across research wor
 
 We aim to help researchers more effectively organize questions, connect evidence, and advance research. To achieve this, we encode professional medical research logic into these agent skills:
 
-* **Literature ​authenticity constraints**​: Implementing hard rules
-* ​**Research type identification**​: We first determine the study type, then execute different logical pathways
-* **Medical-specific prompt logic**
+- **Literature ​authenticity constraints**​: Implementing hard rules
+- ​**Research type identification**​: We first determine the study type, then execute different logical pathways
+- **Medical-specific prompt logic**
 
 ### Key Features of Awesome Med Research Skills
 
 #### Modular Skill Architecture for Team Scaling
 
-* Skills are **composable, replaceable, and extensible**, suitable for both individual use and team collaboration
-* Can be assembled from single-task execution to multi-step workflow pipelines
+- Skills are **composable, replaceable, and extensible**, suitable for both individual use and team collaboration
+- Can be assembled from single-task execution to multi-step workflow pipelines
 
 #### Built for Real Medical Research Scenarios
 
-* Covers real workflows: **topic selection, literature search, study design, writing, graphical abstracts**, and more
-* Not adapted from generic content templates — designed specifically for **medical research contexts**.
+- Covers real workflows: **topic selection, literature search, study design, writing, graphical abstracts**, and more
+- Not adapted from generic content templates — designed specifically for **medical research contexts**.
 
 ### Represent Selected Skills
 
@@ -244,73 +166,73 @@ The examples below represent selected skills from each category.
 
 #### Academic Writing
 
-* [arXiv Preflight](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Academic%20Writing/arxiv-preflight)
-* [Target Journal Matcher](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Academic%20Writing/target-journal-matcher)
-* [Reporting Guideline Compliance Checker](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Academic%20Writing/reporting-guideline-compliance-checker)
-* [Medical English Precision Editor](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Academic%20Writing/medical-english-precision-editor)
+- [arXiv Preflight](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Academic%20Writing/arxiv-preflight)
+- [Target Journal Matcher](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Academic%20Writing/target-journal-matcher)
+- [Reporting Guideline Compliance Checker](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Academic%20Writing/reporting-guideline-compliance-checker)
+- [Medical English Precision Editor](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Academic%20Writing/medical-english-precision-editor)
 
 #### Evidence Insights
 
 ##### Literature Discovery
 
-* [Biomedical Search Strategy Builder](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/biomedical-search-strategy-builder)
-* [Multi-Database Literature Collector](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/multi-database-literature-collector)
-* [High-Value Paper Screener](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/high-value-paper-screener)
-* [Preprint Surveillance Finder](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/preprint-surveillance-finder)
+- [Biomedical Search Strategy Builder](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/biomedical-search-strategy-builder)
+- [Multi-Database Literature Collector](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/multi-database-literature-collector)
+- [High-Value Paper Screener](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/high-value-paper-screener)
+- [Preprint Surveillance Finder](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/preprint-surveillance-finder)
 
 ##### Evidence Mapping & Topic Exploration
 
-* [Biomarker Landscape Scanner](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/biomarker-landscape-scanner)
-* [Topic Evidence Mapper](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/topic-evidence-mapper)
-* [Disease Mechanism Evidence Map](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/disease-mechanism-evidence-map)
-* [Drug-Target Evidence Landscape](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/drug-target-evidence-landscape)
+- [Biomarker Landscape Scanner](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/biomarker-landscape-scanner)
+- [Topic Evidence Mapper](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/topic-evidence-mapper)
+- [Disease Mechanism Evidence Map](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/disease-mechanism-evidence-map)
+- [Drug-Target Evidence Landscape](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/drug-target-evidence-landscape)
 
 ##### Scientific Reading & Interpretation
 
-* [Study Design Identifier](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/study-design-identifier)
-* [Result Reliability Checker](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/result-reliability-checker)
-* [Figure-First Paper Reader](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/figure-first-paper-reader)
-* [Contradictory Findings Resolver](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/contradictory-findings-resolver)
-* [Paper-to-Claim Verifier](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/paper-to-claim-verifier)
+- [Study Design Identifier](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/study-design-identifier)
+- [Result Reliability Checker](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/result-reliability-checker)
+- [Figure-First Paper Reader](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/figure-first-paper-reader)
+- [Contradictory Findings Resolver](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/contradictory-findings-resolver)
+- [Paper-to-Claim Verifier](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/paper-to-claim-verifier)
 
 ##### Research Gap Discovery
 
-* [Medical Research Gap Finder](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/medical-research-gap-finder)
-* [Unmet Clinical Need Extractor](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/unmet-clinical-need-extractor)
-* [Population Gap Detector](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/population-gap-detector)
-* [Method Gap Detector](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/method-gap-detector)
+- [Medical Research Gap Finder](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/medical-research-gap-finder)
+- [Unmet Clinical Need Extractor](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/unmet-clinical-need-extractor)
+- [Population Gap Detector](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/population-gap-detector)
+- [Method Gap Detector](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Evidence%20Insight/method-gap-detector)
 
 #### Protocol Design
 
 ##### Clinical & Translational Study Design
 
-* [Aim and Hypothesis Designer](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/aim-and-hypothesis-designer)
-* [Translational Study Blueprint](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/translational-study-blueprint)
-* [Validation Strategy Designer](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/validation-strategy-designer)
-* [Clinical Cohort Protocol Designer](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/clinical-cohort-protocol-designer)
-* [Real-World Evidence Study Designer](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/real-world-evidence-study-designer)
+- [Aim and Hypothesis Designer](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/aim-and-hypothesis-designer)
+- [Translational Study Blueprint](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/translational-study-blueprint)
+- [Validation Strategy Designer](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/validation-strategy-designer)
+- [Clinical Cohort Protocol Designer](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/clinical-cohort-protocol-designer)
+- [Real-World Evidence Study Designer](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/real-world-evidence-study-designer)
 
 ##### Biomarker, Omics & Genetics Planning
 
-* [Prognostic Biomarker Protocol Designer](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/prognostic-biomarker-protocol-designer)
-* [Single Cell Research Planner](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/single-cell-research-planner)
-* [Bulk Omics Integrative Planner](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/bulk-omics-integrative-planner)
-* [Multi-Omics Clinical Integration Planner](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/multi-omics-clinical-integration-planner)
+- [Prognostic Biomarker Protocol Designer](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/prognostic-biomarker-protocol-designer)
+- [Single Cell Research Planner](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/single-cell-research-planner)
+- [Bulk Omics Integrative Planner](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/bulk-omics-integrative-planner)
+- [Multi-Omics Clinical Integration Planner](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/multi-omics-clinical-integration-planner)
 
 ##### Research Execution Planning
 
-* [Inclusion-Exclusion Criteria Builder](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/inclusion-exclusion-criteria-builder)
-* [Endpoint Definition Designer](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/endpoint-definition-designer)
-* [Sample Size and Power Planning Assistant](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/sample-size-and-power-planning-assistant)
-* [Feasibility-Aware Study Planner](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/feasibility-aware-study-planner)
+- [Inclusion-Exclusion Criteria Builder](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/inclusion-exclusion-criteria-builder)
+- [Endpoint Definition Designer](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/endpoint-definition-designer)
+- [Sample Size and Power Planning Assistant](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/sample-size-and-power-planning-assistant)
+- [Feasibility-Aware Study Planner](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Protocol%20Design/feasibility-aware-study-planner)
 
 #### Data Analysis
 
 ##### Differential Expression & Data Processing
 
-* [Differential Expression Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/differential-expression-analysis)
-* [Batch Effect Correction](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/batch-effect-correction)
-* [Gene-Protein Expression Matrix Normalization](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/gene-protein-expression-matrix-normalization)
+- [Differential Expression Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/differential-expression-analysis)
+- [Batch Effect Correction](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/batch-effect-correction)
+- [Gene-Protein Expression Matrix Normalization](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/gene-protein-expression-matrix-normalization)
 
 ##### Machine Learning & Feature Selection
 
@@ -324,36 +246,36 @@ The examples below represent selected skills from each category.
 
 ##### Clustering & Dimensionality Reduction
 
-* [Consensus Clustering Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/consensus-clustering-analysis)
-* [PCA Dimensionality Reduction](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/pca-dimensionality-reduction)
-* [UMAP and t-SNE Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/umap-tsne-analysis)
+- [Consensus Clustering Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/consensus-clustering-analysis)
+- [PCA Dimensionality Reduction](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/pca-dimensionality-reduction)
+- [UMAP and t-SNE Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/umap-tsne-analysis)
 
 ##### Functional Enrichment & Pathway Analysis
 
-* [GO/KEGG Enrichment Analysis and Visualization](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/gokegg)
-* [GSEA Analysis and Visualization](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/gsea)
-* [GSVA Analysis and Visualization](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/gsva-analysis-and-visualization)
+- [GO/KEGG Enrichment Analysis and Visualization](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/gokegg)
+- [GSEA Analysis and Visualization](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/gsea)
+- [GSVA Analysis and Visualization](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/gsva-analysis-and-visualization)
 
 ##### Immune Infiltration Analysis
 
-* [CIBERSORT Immune Infiltration Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/cibersort-immune-infiltration-analysis)
-* [ESTIMATE Immune Score Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/estimate-immune-score-analysis)
-* [ssGSEA Immune Infiltration Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/ssgsea-immune-infiltration-analysis)
-* [Immune Pathway Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/immune-pathway-analysis)
+- [CIBERSORT Immune Infiltration Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/cibersort-immune-infiltration-analysis)
+- [ESTIMATE Immune Score Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/estimate-immune-score-analysis)
+- [ssGSEA Immune Infiltration Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/ssgsea-immune-infiltration-analysis)
+- [Immune Pathway Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/immune-pathway-analysis)
 
 ##### Network Biology & Regulatory Analysis
 
-* [WGCNA Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/wgcna-analysis)
-* [PPI Network Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/ppi-network-analysis)
-* [TF-Target Gene Regulatory Network Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/tf-target-gene-regulatory-network)
-* [ceRNA  Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/cerna-analysis)
+- [WGCNA Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/wgcna-analysis)
+- [PPI Network Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/ppi-network-analysis)
+- [TF-Target Gene Regulatory Network Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/tf-target-gene-regulatory-network)
+- [ceRNA Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/cerna-analysis)
 
 ##### Survival & Statistical Modeling
 
-* [Kaplan-Meier Survival Curve Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/km-survival-curve)
-* [Univariate and Multivariable Cox Regression Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/univariate-multivariable-cox-regression)
-* [ROC Diagnostic Performance Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/roc-diagnostic-performance)
-* [Nomogram Construction](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/nomogram-construction)
+- [Kaplan-Meier Survival Curve Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/km-survival-curve)
+- [Univariate and Multivariable Cox Regression Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/univariate-multivariable-cox-regression)
+- [ROC Diagnostic Performance Analysis](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/roc-diagnostic-performance)
+- [Nomogram Construction](https://github.com/aipoch/medical-research-skills/tree/main/awesome-med-research-skills/Data%20Analysis/nomogram-construction)
 
 ## Star History
 
@@ -364,4 +286,3 @@ The examples below represent selected skills from each category.
    <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=aipoch/medical-research-skills&type=date&legend=top-left&sealed_token=KD3FdQQ_-RyhAT_jv034hc_lK-Vi0rDl4hcJbGBzdlRzh1WwOQAruUm0NjwY-UBJ0L100W6lkf1SOudZl64-8qB4KRCFHo9MFPm_q-58HrvXF4PMzxpF_jO6_aJwWeyu8GzqOABML6pXrPJnyL3IVlsTArYvdk9u94u9U5mMER0w8tsWQ33mVdNeywvT" />
  </picture>
 </a>
-
