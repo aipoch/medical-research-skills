@@ -60,19 +60,19 @@ python scripts/generate_schematic.py "Krebs cycle" --doc-type journal --generato
 ```bash
 python scripts/generate_schematic.py "Flowchart of a clinical trial enrollment pipeline" \
   --doc-type poster \
-  --generator google/gemini-2.0-flash-001 \
-  --reviewer google/gemini-2.0-flash-001
+  --generator google/gemini-3.6-flash \
+  --reviewer google/gemini-3.6-flash
 ```
 
 ## Implementation Details
 ### Pipeline Stages
 1. **Generation**
    - A code-capable LLM converts the prompt into a diagram image.
-   - Default generator model: `google/gemini-2.0-flash-001`.
+   - Default generator model: `google/gemini-3.6-flash`.
 
 2. **Review**
    - A vision-capable LLM evaluates the generated image against the target `--doc-type`.
-   - Default reviewer model: `google/gemini-2.0-flash-001`.
+   - Default reviewer model: `google/gemini-3.6-flash`.
    - The reviewer returns actionable critique and a numeric quality score.
 
 3. **Refinement Loop**
