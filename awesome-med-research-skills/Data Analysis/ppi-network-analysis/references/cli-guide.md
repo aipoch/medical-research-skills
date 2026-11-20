@@ -6,7 +6,10 @@
 Rscript scripts/main.R [OPTIONS]
 ```
 
-This skill runs entirely offline and expects a local STRING cache on disk.
+Analysis runs offline using a separately provisioned STRING directory. Before
+a full run, follow [external data preparation](external-data.md), verify all six
+files, and set `PPI_STRING_CACHE` to their absolute directory. The Skill package
+does not include STRING tables.
 
 Accepted gene-list inputs include CSV/TSV/XLSX tables and plain-text `.txt` files with one gene symbol per line.
 
@@ -32,8 +35,8 @@ These arguments are required unless `--plot_only TRUE` is used.
 | `-p LOGICAL`, `--plot_only LOGICAL` | `FALSE` | Reuse `data/ppi_result.rds` and regenerate the plot |
 | `-d INT`, `--seed INT` | `42` | Random seed for reproducible layouts |
 | `-u INT`, `--timeout_seconds INT` | `600` | Elapsed time limit |
-| `--string_cache_dir DIR` | `references/string_cache` | Local STRING cache directory |
-| `--string_version TEXT` | `auto` | Cache version to use; newest local version is chosen when `auto` is used |
+| `--string_cache_dir DIR` | `references/string_cache` (unpopulated) | Supply the verified external data directory for a full run |
+| `--string_version TEXT` | `auto` | Pass `v11.5` for the supplied dataset; `auto` selects each table independently |
 | `--figure_family TEXT` | `sans` | PDF font family |
 | `--figure_width NUM` | `12` | Plot width in inches |
 | `--figure_height NUM` | `10` | Plot height in inches |
@@ -76,13 +79,19 @@ Expected files per species:
 Examples:
 
 - human: `9606.protein.aliases.v11.5.txt.gz`
-- mouse: `10090.protein.links.v12.0.txt.gz`
+- mouse: `10090.protein.links.v11.5.txt.gz`
 
-When `--string_version auto` is used, the newest locally available version is selected.
+Use explicit `--string_version v11.5` with the verified dataset. The existing
+`auto` mode selects the newest version of each table independently and can mix
+versions in an inconsistent directory.
 
 ---
 
 ## Complete Examples
+
+The commands below now use the external dataset. The recorded output sizes and
+runtime measurements are historical upstream observations from 2026-04-22; they
+are not new measurements of this packaging change.
 
 ### Example 1: Basic Human Run
 
@@ -91,6 +100,8 @@ Rscript scripts/main.R \
   --genelist_file tests/data/gene_list.csv \
   --species human \
   --threshold 700 \
+  --string_cache_dir "$PPI_STRING_CACHE" \
+  --string_version v11.5 \
   --output_dir tests/output/basic-run
 ```
 
@@ -129,6 +140,8 @@ Rscript scripts/main.R \
   --genelist_file tests/data/gene_list.csv \
   --species 9606 \
   --threshold 700 \
+  --string_cache_dir "$PPI_STRING_CACHE" \
+  --string_version v11.5 \
   --output_dir tests/output/styled-run \
   --style_layout circle \
   --style_line curve \
@@ -209,7 +222,8 @@ Rscript scripts/main.R \
   --genelist_file tests/data/gene_list.csv \
   --species human \
   --threshold 700 \
-  --string_cache_dir /path/to/string_cache \
+  --string_cache_dir "$PPI_STRING_CACHE" \
+  --string_version v11.5 \
   --output_dir tests/output/custom-cache-run
 ```
 

@@ -14,7 +14,10 @@ Meaning:
 How to fix:
 
 - Confirm the input file path is correct.
-- Check that `--string_cache_dir` points to an existing directory.
+- Complete [external data preparation](external-data.md), including SHA-256
+  verification. STRING tables are outside the installed Skill.
+- Pass that existing directory with `--string_cache_dir` and select
+  `--string_version v11.5`; the default `references/string_cache` is unpopulated.
 - Ensure the cache directory contains the required aliases, info, and links files for the selected species, such as:
   - `9606.protein.aliases.v11.5.txt.gz`
   - `9606.protein.info.v11.5.txt.gz`
