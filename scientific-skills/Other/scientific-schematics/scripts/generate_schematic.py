@@ -9,8 +9,8 @@ import requests
 from datetime import datetime
 
 # Configuration
-DEFAULT_GENERATOR = "google/gemini-2.0-flash-001" 
-DEFAULT_REVIEWER = "google/gemini-2.0-flash-001"     
+DEFAULT_GENERATOR = "google/gemini-3.6-flash"
+DEFAULT_REVIEWER = "google/gemini-3.6-flash"
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 MAX_RETRIES = 3
 QUALITY_THRESHOLD = 8.5
