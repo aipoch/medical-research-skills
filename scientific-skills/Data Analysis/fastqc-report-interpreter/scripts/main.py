@@ -102,7 +102,7 @@ class FastQCInterpreter:
         print("FASTQC REPORT INTERPRETATION")
         print(f"{'='*60}\n")
         
-        status_icons = {"good": "✓", "warning": "⚠", "fail": "✗", "unknown": "?"}
+        status_icons = {"good": "[GOOD]", "warning": "[WARNING]", "fail": "[FAIL]", "unknown": "?"}
         
         for module, result in interpretations.items():
             icon = status_icons.get(result["status"], "?")
