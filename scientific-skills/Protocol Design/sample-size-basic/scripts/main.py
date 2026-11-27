@@ -40,7 +40,8 @@ class SampleSizeCalculator:
         z_alpha = stats.norm.ppf(1 - alpha/2)
         z_beta = stats.norm.ppf(power)
         
-        events = ((z_alpha + z_beta) ** 2) / (p_event * (np.log(hr) ** 2))
+        # Schoenfeld (1983), 1:1 allocation: events = (z_a + z_b)^2 / (0.5 * 0.5 * log(HR)^2)
+        events = ((z_alpha + z_beta) ** 2) / (0.25 * (np.log(hr) ** 2))
         n = events / p_event
         
         return int(np.ceil(n))
